@@ -44,15 +44,15 @@ export default {
     { path: '~/components/TheAgency', prefix: 'TheAgency' },
   ],
 
-  sitemap:false,
+  sitemap: false,
   target: 'server',
   ssr: true,
   wp: {
-    sitemap: false
+    sitemap: false,
   },
   server: {
     port: process.env.VUE_NUXT_SERVER_PORT || 8080,
-    host: "0.0.0.0",
+    host: '0.0.0.0',
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -64,7 +64,6 @@ export default {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/style-resources',
     '@nuxtjs/google-fonts',
-    
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -83,9 +82,8 @@ export default {
     ],
   ],
   bootstrapVue: {
-    icons: false
+    icons: false,
   },
-  
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -97,5 +95,5 @@ export default {
   build: {
     analyze: true,
   },
-  transpile: ["bootstrap-vue"],
+  transpile: ['bootstrap-vue'],
 }
