@@ -25,73 +25,7 @@ export default {
       default: null,
     },
   },
-  data() {
-    return {
-      members: [
-        {
-          firstname: 'Ghislain',
-          lastname: 'De La Chaise',
-          position: '<p>Chief Executive</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Guillaume',
-          lastname: 'Lairan',
-          position: '<p>Chief Executive Officer</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Jimmy',
-          lastname: 'Guindy',
-          position: '<p>Production Director<br>  Events & XP</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Pierre Antoine',
-          lastname: 'De Bouärd',
-          position: '<p>Creative Director<br>  Image & Branding</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Julien',
-          lastname: 'Pacull',
-          position: '<p>Strategy Director<br>  Strategy & Marketing</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Alice',
-          lastname: 'Jorry',
-          position: '<p> Production Director<br>  Film & Content</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Etienne',
-          lastname: 'Baillon',
-          position: '<p>Production Director <br>  Events & XP</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Cathy',
-          lastname: 'Serrat',
-          position: '<p>Head of Influence <br>  Social & Influence</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Agathe',
-          lastname: 'Giraudeau',
-          position: '<p>Head of Social <br>  Social & Influence</p>',
-          email: 'mailto:',
-        },
-        {
-          firstname: 'Gustave',
-          lastname: 'Bernier',
-          position:
-            '<p>Head of Creative technology <br> Creative Technology</p>',
-          email: 'mailto:',
-        },
-      ],
-    }
-  },
+  
 }
 </script>
 <style lang="scss" scoped>
