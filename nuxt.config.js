@@ -56,7 +56,7 @@ export default {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/style-resources',
     '@nuxtjs/google-fonts',
-    '@nuxt/image',
+    
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
