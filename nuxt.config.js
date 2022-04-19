@@ -44,7 +44,7 @@ export default {
     { path: '~/components/TheAgency', prefix: 'TheAgency' },
   ],
 
-  
+  sitemap:false,
   target: 'server',
   ssr: true,
   wp: {
