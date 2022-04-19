@@ -50,6 +50,10 @@ export default {
   wp: {
     sitemap: false
   },
+  server: {
+    port: process.env.VUE_NUXT_SERVER_PORT || 8080,
+    host: "0.0.0.0",
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -87,4 +91,5 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  transpile: ["bootstrap-vue"],
 }
