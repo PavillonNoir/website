@@ -45,7 +45,8 @@ export default {
   ],
 
   // target for images
-  target: 'static',
+  target: 'server',
+  ssr: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
