@@ -23,7 +23,8 @@ export default {
   // background-image: url(cover.Paysage.sourceUrl);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position-x: center;
+  background-position-y: -170px;
   background-origin: padding-box;
   @include responsive('phone') {
     //  background-image: url(cover.portrait.sourceUrl);

@@ -82,6 +82,10 @@ export default {
       },
     ],
   ],
+  bootstrapVue: {
+    icons: false
+  },
+  
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -90,6 +94,8 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    analyze: true,
+  },
   transpile: ["bootstrap-vue"],
 }

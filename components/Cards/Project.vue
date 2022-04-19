@@ -11,7 +11,7 @@
           blank-color="#bbb"
           fluid
           class="project-cover"
-          alt="Project featured Image"
+          alt="Featured Image"
         ></b-img-lazy>
         <div
           :class="
@@ -23,7 +23,6 @@
         >
           <b-img-lazy
             :src="project.acf.logo_client.sizes.medium"
-            blank="true"
             fluid
             class="project-client__logo"
             alt="Logo  Client"

@@ -21,3 +21,11 @@ li {
 a {
   text-decoration: none;
 }
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
