@@ -17,12 +17,11 @@
     <b-row>
       <b-col sm="12" md="6" class="single-job__content"> </b-col>
       <b-col sm="12" md="6" class="single-job__content">
-        <h2 class="single-job__title">
-          <h2 class="single-job__title opacity-none">
-            Consultant.e <br />
-            Social Media
-          </h2>
+        <h2 class="single-job__title opacity-none">
+          Consultant.e <br />
+          Social Media
         </h2>
+
         <p class="single-job__content-details">
           Vous bénéficiez d’une première expérience d’environ 3/4 ans dans un
           poste lié au Social Media en agence de communication, dans un média ou
