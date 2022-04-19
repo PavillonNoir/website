@@ -44,9 +44,12 @@ export default {
     { path: '~/components/TheAgency', prefix: 'TheAgency' },
   ],
 
-  // target for images
+  
   target: 'server',
   ssr: true,
+  wp: {
+    sitemap: false
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
