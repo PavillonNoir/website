@@ -1,0 +1,196 @@
+@import '../variables/fonts';
+@import './responsive.scss';
+
+@mixin h1 {
+  font-family: $NoeDisplay;
+  font-size: 6.69rem;
+  line-height: 6.69rem;
+  letter-spacing: -1px;
+
+  @include responsive('widescreen') {
+    font-size: calc(6.69rem * 0.75);
+    line-height: calc(6.69rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(6.69rem * 0.64);
+    line-height: calc(6.69rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 4rem;
+    line-height: 4.33rem;
+    letter-spacing: 0;
+  }
+}
+
+@mixin h2 {
+  font-family: $NoeDisplay;
+  font-size: 5rem;
+  line-height: 5.5rem;
+  letter-spacing: -1px;
+
+  @include responsive('widescreen') {
+    font-size: calc(5rem * 0.75);
+    line-height: calc(5.5rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(5rem * 0.64);
+    line-height: calc(5.5rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 3rem;
+    line-height: 3.5rem;
+    letter-spacing: 0;
+  }
+}
+@mixin h3 {
+  font-size: 3rem;
+  line-height: 3.5rem;
+  letter-spacing: 0;
+  font-family: $NoeDisplay;
+  @include responsive('widescreen') {
+    font-size: calc(3rem * 0.75);
+    line-height: calc(3.5rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(3rem * 0.64);
+    line-height: calc(3.5rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 2rem;
+    line-height: 2.33rem;
+  }
+}
+@mixin body {
+  font-family: $IBMPlexMono;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 1px;
+  @include responsive('widescreen') {
+    font-size: calc(1.5rem * 0.75);
+    line-height: calc(2rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(1.5rem * 0.64);
+    line-height: calc(2rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 1.17rem;
+    line-height: 1.67rem;
+  }
+}
+@mixin caption {
+  font-family: $IBMPlexMono;
+  font-size: 1.17rem;
+  line-height: 1.75rem;
+  letter-spacing: 2.5px;
+  @include responsive('widescreen') {
+    font-size: calc(1.17rem * 0.75);
+    line-height: calc(1.75rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(1.17rem * 0.64);
+    line-height: calc(1.75rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 1rem;
+    line-height: 1.33rem;
+  }
+}
+@mixin footer {
+  font-family: $IBMPlexMono;
+  font-size: 1.17rem;
+  line-height: 1.75rem;
+  letter-spacing: 0;
+  @include responsive('widescreen') {
+    font-size: calc(1.17rem * 0.75);
+    line-height: calc(1.75rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(1.17rem * 0.64);
+    line-height: calc(1.75rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+}
+@mixin footer-caption {
+  font-family: $IBMPlexMono;
+  font-size: 1.17rem;
+  line-height: 1.5rem;
+  letter-spacing: 2.5px;
+  @include responsive('widescreen') {
+    font-size: calc(1.17rem * 0.75);
+    line-height: calc(1.5rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(1.75rem * 0.64);
+    line-height: calc(1.5rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+@mixin nav {
+  font-family: $IBMPlexMono;
+  font-size: 1.17rem;
+  line-height: 1.75rem;
+  @include responsive('widescreen') {
+    font-size: calc(1.17rem * 0.75);
+    line-height: calc(1.75rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(1.17rem * 0.64);
+    line-height: calc(1.75rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+}
+
+@mixin link {
+  font-family: $IBMPlexMono;
+  font-size: 1.17rem;
+  line-height: 2rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: capitalize;
+  text-decoration: none;
+  color: $primary;
+  &:hover {
+    text-decoration: underline;
+  }
+  @include responsive('widescreen') {
+    font-size: calc(1.17rem * 0.75);
+    line-height: calc(2rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(1.17rem * 0.64);
+    line-height: calc(2rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 1rem;
+  }
+}
+
+@mixin job-content {
+  font-family: $IBMPlexMono;
+  font-size: 1rem;
+  line-height: 1.33rem;
+  letter-spacing: 2.5px;
+  @include responsive('widescreen') {
+    font-size: calc(1rem * 0.75);
+    line-height: calc(1.33rem * 0.75);
+  }
+  @include responsive('desktop') {
+    font-size: calc(1rem * 0.64);
+    line-height: calc(1.33rem * 0.64);
+  }
+  @include responsive('phone') {
+    font-size: 0.83rem;
+    line-height: 1.33rem;
+    letter-spacing: 0;
+  }
+}

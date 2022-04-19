@@ -1,0 +1,23 @@
+@import 'variables/colors';
+@import 'variables/global';
+@import 'mixins/typography';
+@import 'mixins/responsive';
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  video {
+    width: 100% !important;
+    object-fit: cover !important;
+    min-height: 100%;
+  }
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}

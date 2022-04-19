@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Noe Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('~assets/fonts/NoeDisplay-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('~assets/fonts/IBMPlexMono-Regular.ttf') format('truetype');
+}
+
+$NoeDisplay: 'Noe Display', sans-serif;
+$IBMPlexMono: 'IBM Plex Mono';
