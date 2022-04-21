@@ -107,11 +107,11 @@ export default {
   name: 'SingleProject',
   components: {
     LazyHydrate,
-    BlocksFourImages: () => import('@/components/blocks/FourImages'),
-    BlocksDescription: () => import('@/components/blocks/Description'),
-    BlocksVideo: () => import('@/components/blocks/video'),
-    BlocksThreeImages: () => import('@/components/blocks/ThreeImages'),
-    BlocksTwoVideo: () => import('@/components/blocks/TwoVideo'),
+    BlocksFourImages: () => import('@/components/Blocks/FourImages'),
+    BlocksDescription: () => import('@/components/Blocks/Description'),
+    BlocksVideo: () => import('@/components/Blocks/video'),
+    BlocksThreeImages: () => import('@/components/Blocks/ThreeImages'),
+    BlocksTwoVideo: () => import('@/components/Blocks/TwoVideo'),
   },
   async asyncData({ app, params }) {
     const project = await app.$wp.cpt('project').slug(params.slug).embed()
