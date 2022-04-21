@@ -73,7 +73,7 @@ export default {
     [
       'wp-nuxt',
       {
-        endpoint: 'https://pavillon-noir-site.kinshasadigital.com/wp-json/',
+        endpoint: 'https://preprod.pavillonnoir.com/wp-json/',
         extensions: true, // For additional functions of wpapi-extensions
         /* other options of WP-API */
       },

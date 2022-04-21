@@ -147,6 +147,7 @@ export default {
   &__cover {
     position: relative;
     background-size: cover;
+    background-color: $primary;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
