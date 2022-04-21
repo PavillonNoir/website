@@ -58,9 +58,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxt/components',
-
     '@nuxtjs/eslint-module',
-
     '@nuxtjs/stylelint-module',
     '@nuxtjs/style-resources',
     '@nuxtjs/google-fonts',
@@ -81,6 +79,9 @@ export default {
       },
     ],
   ],
+  
+    
+  
   bootstrapVue: {
     icons: false,
   },
@@ -92,6 +93,32 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    collapseBooleanAttributes: true,
+    decodeEntities: true,
+    minifyCSS: true,
+    minifyJS: true,
+    processConditionalComments: true,
+    removeEmptyAttributes: true,
+    removeRedundantAttributes: true,
+    trimCustomFragments: true,
+    useShortDoctype: true,
+    optimizeCSS: true,
+    minimize: true,
+    extractCSS: true,
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue)$/,
+            chunks: 'all',
+            enforce: true,
+          },
+        },
+      },
+    },
+  },
   transpile: ['bootstrap-vue'],
 }

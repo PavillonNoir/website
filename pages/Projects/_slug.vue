@@ -1,70 +1,139 @@
 <template>
   <div class="single-project">
-    <div class="single-project__cover">
-      <h2 class="single-project__cover-title">
-        Le Sillage<br />
-        de la Mémoire
-      </h2>
-    </div>
-    <b-row class="single-project-content justify-content-between">
-      <b-col
-        md="12"
-        lg="6"
-        class="single-project-content__description d-flex flex-column justify-content-between"
+    <LazyHydrate when-idle>
+      <div
+        class="single-project__cover"
+        :style="`background-image: url(${
+          projectDetail.acf.cover &&
+          projectDetail.acf.cover.image.desktop.sizes.large
+        });`"
       >
-        <h2 class="sub-title">A multi-sensory experience</h2>
-        <p class="summary">
-          Amazed by the installation “the silence of particles” by artist
-          Guillaume cousin, Pavillon Noir teamed up with Firmenich, the Magique
-          Studio and Nuit Noire to make it a multi-sensory experience for the
-          Nuit Blanche.
-        </p>
-      </b-col>
-      <b-col md="12" lg="2"></b-col>
-      <b-col md="12" lg="4" class="single-project-content__meta">
-        <div class="client">
-          <h3>Client</h3>
-          <p>NUIT BLANCHE</p>
+        <h2 class="single-project__cover-title">
+          {{ projectDetail.title.rendered || 'Project title' }}
+        </h2>
+      </div>
+    </LazyHydrate>
+    <LazyHydrate when-visible>
+      <div
+        class="single-project__cover mobile"
+        :style="`background-image: url(${
+          projectDetail.acf.cover &&
+          projectDetail.acf.cover.image.mobile.sizes.large
+        });`"
+      >
+        <h2 class="single-project__cover-title">
+          {{ projectDetail.title.rendered }}
+        </h2>
+      </div>
+    </LazyHydrate>
+    <LazyHydrate when-visible>
+      <b-row class="single-project-content justify-content-between">
+        <b-col
+          md="12"
+          lg="6"
+          class="single-project-content__description d-flex flex-column justify-content-between"
+        >
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <div class="sub-title" v-html="(projectDetail.acf.description && projectDetail.acf.description.subtitle.paysage) || 'subtitle'"
+          ></div>
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <div class="summary" v-html="(projectDetail.acf.description &&projectDetail.acf.description.summary.paysage) ||'Summary'"
+          ></div>
+        </b-col>
+        <b-col md="12" lg="2"></b-col>
+        <b-col md="12" lg="4" class="single-project-content__meta">
+          <div class="client">
+            <h3>Client</h3>
+            <p>
+              {{
+                projectDetail.pure_taxonomies.client &&
+                projectDetail.pure_taxonomies.client[0].name
+              }}
+            </p>
+          </div>
+          <div class="Expertises">
+            <h3>Expertises</h3>
+            <p>
+              <span
+                v-for="expertise in projectDetail.pure_taxonomies.expertise"
+                :key="expertise.term_id"
+                >{{ htmlEncode(expertise.name) }}
+              </span>
+            </p>
+          </div>
+          <div class="Partenaires">
+            <h3>Partners</h3>
+            <p>
+              <span
+                v-for="partner in projectDetail.pure_taxonomies.partner"
+                :key="partner.term_id"
+                >{{ partner.name }}
+              </span>
+            </p>
+          </div>
+        </b-col>
+      </b-row>
+    </LazyHydrate>
+    <LazyHydrate when-visible>
+      <div class="project-block">
+        <div>
+          <component
+            :is="type(block.acf_fc_layout)"
+            v-for="(block, index) in projectDetail.acf.projects_blocks"
+            :key="index"
+            :block="block"
+          ></component>
         </div>
-        <div class="Expertises">
-          <h3>Expertises</h3>
-          <p>
-            <span>Art Direction</span>
-            <span>Scenography</span>
-            <span>Production</span>
-          </p>
-        </div>
-        <div class="Partenaires">
-          <h3>Partners</h3>
-          <p>
-            <span>FIRMENICH</span>
-            <span>MAGIQUE</span>
-            <span>NUIT NOIR</span>
-            <span>GUILLAUME COUSIN</span>
-          </p>
-        </div>
-      </b-col>
-    </b-row>
-    <div class="project-block">
-      <BlocksFourImages />
-      <BlocksDescription />
-      <BlocksVideo />
-      <BlocksThreeImages />
-      <BlocksTwoVideo />
-      <BlocksSliderImage />
-    </div>
+      </div>
+    </LazyHydrate>
     <FooterBlockCta title="See More Project" link="/projects"></FooterBlockCta>
   </div>
 </template>
 <script>
+import LazyHydrate from 'vue-lazy-hydration'
 export default {
   name: 'SingleProject',
+  components: {
+    LazyHydrate,
+    BlocksFourImages: () => import('@/components/blocks/FourImages'),
+    BlocksDescription: () => import('@/components/blocks/Description'),
+    BlocksVideo: () => import('@/components/blocks/video'),
+    BlocksThreeImages: () => import('@/components/blocks/ThreeImages'),
+    BlocksTwoVideo: () => import('@/components/blocks/TwoVideo'),
+  },
+  async asyncData({ app, params }) {
+    const project = await app.$wp.cpt('project').slug(params.slug).embed()
+    const projectDetail = project[0]
+    return { projectDetail }
+  },
+  methods: {
+    type(block) {
+      if (block === 'block_4_images') {
+        return 'BlocksFourImages'
+      }
+      if (block === 'block_text') {
+        return 'BlocksDescription'
+      }
+      if (block === 'bloc_video') {
+        return 'BlocksVideo'
+      }
+      if (block === 'bloc_3_images') {
+        return 'BlocksThreeImages'
+      }
+      if (block === 'bloc_2_videos') {
+        return 'BlocksTwoVideo'
+      }
+    },
+    htmlEncode(str) {
+      return str.replace(/&amp;/g, '&')
+    },
+  },
 }
 </script>
 <style lang="scss">
 .single-project {
   &__cover {
-    background-image: url(/sillage-noir.png);
+    position: relative;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -72,14 +141,50 @@ export default {
     justify-content: center;
     align-items: center;
     height: 1080px;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.25);
+    }
+
+    @include responsive('phone') {
+      height: 667px;
+      display: none;
+    }
+    &.mobile {
+      @media (min-width: 768px) {
+        display: none;
+      }
+      @include responsive('phone') {
+        display: flex;
+        align-items: center;
+      }
+    }
     &-title {
       @include h2;
       color: $white;
       text-align: center;
+      z-index: 999;
     }
   }
   &-content {
-    padding: 150px 90px;
+    padding: 9.375rem 5.625rem;
+    @include responsive('desktop') {
+      padding: calc(9.375rem * 0.75) calc(5.625rem * 0.75);
+    }
+    @include responsive('widescreen') {
+      padding: calc(9.375rem * 0.64) calc(5.625rem * 0.64);
+    }
+    @include responsive('tablet') {
+      padding: calc(9.375rem * 0.51) calc(5.625rem * 0.51);
+    }
+    @include responsive('phone') {
+      padding: calc(9.375rem * 0.36) calc(5.625rem * 0.36);
+    }
     margin: 0;
     .sub-title {
       @include h3;
@@ -99,11 +204,22 @@ export default {
       p {
         @include caption;
         margin-bottom: 1.25rem;
+        span {
+          position: relative;
+          &::after {
+            content: ',';
+          }
+          &:last-child {
+            &::after {
+              content: '';
+            }
+          }
+        }
       }
     }
   }
   .project-block {
-    margin-bottom: 150px;
+    margin-bottom: 9.375rem;
   }
 }
 </style>

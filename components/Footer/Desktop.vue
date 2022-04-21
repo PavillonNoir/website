@@ -3,9 +3,13 @@
     <div class="footer-container">
       <div class="footer-item footer-newsletter footer-newsletter-mobile">
         <div class="footer-item__newsletter">
-          <h3 class="footer-title">GET OUR NEWS</h3>
+          <h2 class="footer-title">GET OUR NEWS</h2>
           <form class="newsletter">
-            <input type="email" placeholder="Your email Address" />
+            <input
+              type="email"
+              placeholder="Your email Address"
+              name="newsletter"
+            />
             <button type="submit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +49,7 @@
       <div class="footer-item footer-info col-md-12 col-lg-5">
         <div class="footer-item__adress">
           <h3 class="footer-title">Address</h3>
-          <p class="footer-text">11 Rue Farcot 94600 Saint Ouen France</p>
+          <address class="footer-text">{{ address }}</address>
         </div>
         <div class="footer-item__connect">
           <h3 class="footer-title">connect</h3>
@@ -53,22 +57,23 @@
             <a
               v-for="(connectLink, index) in connectLinks"
               :key="index"
-              :href="`mailto:${connectLink.mail}`"
-              >{{ connectLink.title }}</a
+              :href="`mailto:${connectLink.connect_link}`"
+              >{{ connectLink.connect_label }}</a
             >
           </div>
         </div>
         <div class="footer-item__phone">
           <h3 class="footer-title">Phone</h3>
-          <p class="footer-text">+33 (0)1 01 47 87 18 40</p>
+          <p class="footer-text">{{ phoneNumber }}</p>
         </div>
         <div class="footer-item__social">
           <h3 class="footer-title">Follow us</h3>
           <p class="footer-text">
-            <span><a href="http://">Fb</a></span>
-            <span><a href="http://">Ig</a></span
-            ><span><a href="http://">Lk</a></span
-            ><span><a href="http://">Vi</a></span>
+            <span v-for="(social, index) in socialLinks" :key="index">
+              <a :href="social.social_link" rel="noreferrer" target="_blank">{{
+                social.social_abbreviation
+              }}</a>
+            </span>
           </p>
         </div>
       </div>
@@ -126,22 +131,23 @@ export default {
   name: 'FooterDesktop',
   data() {
     return {
+      isOpen: false,
+      connectLinks: [],
+      socialLinks: [],
+      address: '',
+      phoneNumber: '',
       date: new Date().getFullYear(),
-      connectLinks: [
-        {
-          title: 'Jobs',
-          mail: 'jobs@test.com',
-        },
-        {
-          title: 'Briefs',
-          mail: 'Briefs@test.com',
-        },
-        {
-          title: 'Talents',
-          mail: 'talents@test.com',
-        },
-      ],
     }
+  },
+  async fetch() {
+    const data = await this.$wp.cpt('website-info').slug('footer')
+    this.connectLinks = await data[0].acf.connect
+    this.address = await data[0].acf.address
+    this.phoneNumber = await data[0].acf.phone
+    this.socialLinks = await data[0].acf.social_links
+  },
+  mounted() {
+    this.$fetch()
   },
 }
 </script>

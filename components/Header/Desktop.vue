@@ -54,16 +54,16 @@
           </g>
         </svg>
       </div>
-      <nav class="navbar">
+      <ul role="nav" class="navbar">
         <li><NuxtLink to="/projects" class="menu-item">Projects</NuxtLink></li>
         <li><NuxtLink to="/agency" class="menu-item">The Agency</NuxtLink></li>
-      </nav>
+      </ul>
     </div>
     <div :class="isOpen ? 'hamburger d-flex show' : 'hamburger d-flex'">
       <div class="hamburger-container col-md-12 col-lg-4">
         <div class="logo" @click="toggleMenu">
           <svg
-            id="pavillon-noir-logo"
+            id="pavillon-noir-logo-mobile"
             data-name="Logo pavillon noir"
             xmlns="http://www.w3.org/2000/svg"
             width="41.084"
@@ -115,7 +115,7 @@
           </svg>
         </div>
         <div class="hamburger-menu">
-          <ul>
+          <ul role="nav">
             <li class="hamburger-menu__item" @click="toggleMenu">
               <nuxtLink to="/">Home</nuxtLink>
             </li>
@@ -129,37 +129,40 @@
         </div>
         <div class="hamburger-infos">
           <div class="hamburger-infos__connect">
-            <h3 class="hamburger-title">connect</h3>
+            <h2 class="hamburger-title">connect</h2>
             <div class="jobs-connect__link">
               <a
                 v-for="(connectLink, index) in connectLinks"
                 :key="index"
-                :href="`mailto:${connectLink.mail}`"
-                >{{ connectLink.title }}</a
+                :href="`mailto:${connectLink.connect_link}`"
+                >{{ connectLink.connect_label }}</a
               >
             </div>
           </div>
           <div class="hamburger-infos__address">
-            <h3 class="hamburger-title">Address</h3>
+            <h2 class="hamburger-title">Address</h2>
+
             <address class="hamburger-text">
-              11 Rue Farcot 94600 Saint Ouen France
+              {{ address }}
             </address>
           </div>
           <div class="hamburger-infos__phone">
-            <h3 class="hamburger-title">Phone</h3>
+            <h2 class="hamburger-title">Phone</h2>
             <p class="hamburger-text">
-              <a href="tel:+33 (0)1 01 47 87 18 40" class="text-light"
-                >+33 (0)1 01 47 87 18 40</a
-              >
+              <a href="`tel:${}`" class="text-light">{{ phoneNumber }} </a>
             </p>
           </div>
           <div class="hamburger-infos__social">
             <h3 class="hamburger-title">Follow us</h3>
             <p class="hamburger-text">
-              <span><a href="http://facebook.com" target="blank">Fb</a></span>
-              <span><a href="http://instagram.com">Ig</a></span
-              ><span><a href="http://linkedin.">Lk</a></span
-              ><span><a href="http://">Vi</a></span>
+              <span v-for="(social, index) in socialLinks" :key="index">
+                <a
+                  :href="social.social_link"
+                  rel="noreferrer"
+                  target="_blank"
+                  >{{ social.social_abbreviation }}</a
+                >
+              </span>
             </p>
           </div>
         </div>
@@ -173,25 +176,29 @@ export default {
   data() {
     return {
       isOpen: false,
-      connectLinks: [
-        {
-          title: 'Jobs',
-          mail: 'jobs@test.com',
-        },
-        {
-          title: 'Briefs',
-          mail: 'Briefs@test.com',
-        },
-        {
-          title: 'Talents',
-          mail: 'talents@test.com',
-        },
-      ],
+      connectLinks: [],
+      socialLinks: [],
+      address: '',
+      phoneNumber: '',
     }
   },
+  async fetch() {
+    const data = await this.$wp.cpt('website-info').slug('footer')
+    this.connectLinks = await data[0].acf.connect
+    this.address = await data[0].acf.address
+    this.phoneNumber = await data[0].acf.phone
+    this.socialLinks = await data[0].acf.social_links
+  },
+  mounted() {
+    this.$fetch()
+  },
+
   methods: {
     toggleMenu() {
       this.isOpen = !this.isOpen
+    },
+    closeMenu() {
+      this.isOpen = false
     },
   },
 }

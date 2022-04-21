@@ -1,35 +1,39 @@
 <template>
-  <b-row class="justify-content-end">
+  <b-row :class="block.orientation === 'right' ? 'justify-content-end' : 'justify-content-start' ">
     <b-col md="6" class="description">
-      <h3 class="title">Smell, Hear and See</h3>
-      <p>
-        Firmenich and Magique studio worked together with Guillaume Cousin to
-        give an olfactive dimension to the work and its subject, while Nuit
-        Noire worked on a soundtrack. The monumental piece of work was installed
-        in the heart of the Saint-Eustache church in Paris, giving it a magical
-        setting and a divine dimension.
-      </p>
+      <h3 class="title">{{ block.title }}</h3>
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <div v-html="block.description"></div>
     </b-col>
-    <!-- <b-col md="6" class="description ">
-   
-  </b-col>  -->
   </b-row>
 </template>
 <script>
 export default {
   name: 'BlocksDescription',
   props: {
-    text: {
+    block: {
       type: Object,
       default: null,
     },
   },
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss" >
 .description {
-  padding: 0 90px;
-  margin-bottom: 150px;
+  padding: 0 5.625rem;
+  margin-bottom: 9.375rem;
+  @include responsive('desktop') {
+    padding: 0 calc(5.625rem * 0.75);
+    margin-bottom: calc(9.375rem * 0.75);
+  }
+  @include responsive('widescreen') {
+    padding: 0 calc(5.625rem * 0.64);
+    margin-bottom: calc(9.375rem * 0.64);
+  }
+  @include responsive('tablet') {
+    padding: 0 calc(5.625rem * 0.51);
+    margin-bottom: calc(9.375rem * 0.51);
+  }
   display: flex;
   flex-direction: column;
   justify-content: space-between;

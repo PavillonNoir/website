@@ -2,8 +2,7 @@
   <section class="single-job">
     <b-row class="job-infos">
       <h2 class="single-job__title">
-        Consultant.e <br />
-        Social Media
+        {{job[0] && job[0].title.rendered}}
       </h2>
       <ul class="single-job__content-infos">
         <li>Overview</li>
@@ -70,18 +69,23 @@
 <script>
 export default {
   name: 'JobsPage',
+  async asyncData({app, params}){
+    const job = await app.$wp.cpt('job').slug(params.slug).embed()
+    return {job}
+  }
 }
 </script>
 <style lang="scss" scoped>
 .single-job {
-  padding: 310px 120px 150px;
+  padding: 19.375rem 7.5rem 9.375rem;
   position: relative;
 
   &__title {
     @include h2;
-    margin-bottom: 34px;
+    margin-bottom: 2.125rem;
   }
   &__content {
+    padding: 0;
     &-infos {
       padding: 0;
       @include job-content;
@@ -93,10 +97,14 @@ export default {
       @include caption;
       font-weight: 600;
       color: $primary;
-      margin-bottom: 120px;
+      margin-bottom: 7.5rem;
+      
     }
     .opacity-none {
       opacity: 0;
+      @include responsive('phone'){
+        display:none;
+      }
     }
   }
   &__apply {
@@ -110,6 +118,18 @@ export default {
     @media (max-width: 768px) {
       position: relative;
     }
+  }
+  @include responsive('dekstop'){
+    padding: calc(19.375rem*.75) calc(7.5rem*.75) calc(9.375rem*.75); 
+  }
+  @include responsive('widescreen'){
+    padding: calc(19.375rem*.64) calc(7.5rem*.64) calc(9.375rem*.64); 
+  }
+  @include responsive('tablet'){
+    padding: calc(19.375rem*.51) calc(7.5rem*.51) calc(9.375rem*.51); 
+  }
+  @include responsive('phone'){
+    padding: calc(19.375rem*.36) calc(7.5rem*.36) calc(9.375rem*.36); 
   }
 }
 </style>

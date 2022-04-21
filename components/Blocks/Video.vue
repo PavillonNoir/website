@@ -1,13 +1,23 @@
 <template>
-  <div class="block-video">
+  <div :class="block.video && block.video.orientation ==='boxed' ? 'block-video boxed' : 'block-video '">
     <video
       ref="blockvideo"
-      :poster="poster || '/video.png'"
+      :poster="(block.video && block.video.video_poster.url) || (block.poster && block.poster.sizes.large)"
       preload="none"
       playsinline
       :class="hasBackground ? 'video-player bg-dark' : 'video-player'"
     >
-      <source src="/video/video.mp4" type="video/mp4" />
+      <source
+        :src="(block.video && block.video.video_url.url) || (block.url && block.url.url)"
+        type="video/mp4"
+      />
+      <track
+        label="English"
+        kind="subtitles"
+        srclang="en"
+        src="captions/vtt/sintel-en.vtt"
+        default
+      />
     </video>
 
     <svg
@@ -35,14 +45,11 @@
 export default {
   name: 'BlocksVideo',
   props: {
-    link: {
-      type: String,
+    block: {
+      type: Object,
       default: null,
     },
-    poster: {
-      type: String,
-      default: null,
-    },
+
     hasBackground: {
       type: Boolean,
       default: false,
@@ -74,6 +81,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .block-video {
+  &.boxed {
+    padding: 0 5.625rem;
+    @include responsive('desktop') {
+      padding: 0 calc(5.625rem * 0.75);
+    }
+    @include responsive('widescreen') {
+      padding: 0 calc(5.625rem * 0.64);
+    }
+    @include responsive('tablet') {
+      padding: 0;
+    }
+  }
   position: relative;
   margin-bottom: 150px;
 
@@ -92,7 +111,7 @@ export default {
   }
   .video-player {
     &.bg-dark {
-      background: $primary;
+      background: $grey;
     }
     height: 67.875rem;
     @include responsive('widescreen') {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderDesktop />
-    <Nuxt />
+    <Nuxt keep-alive />
     <FooterDesktop />
   </div>
 </template>

@@ -26,9 +26,10 @@ export default {
   background-position-x: center;
   background-position-y: -170px;
   background-origin: padding-box;
-  @include responsive('phone') {
+  @include responsive('tablet') {
     //  background-image: url(cover.portrait.sourceUrl);
     height: 667px;
+    background-position-y: center;
   }
 }
 </style>

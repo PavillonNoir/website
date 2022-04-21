@@ -1,19 +1,19 @@
 <template>
   <div class="block-4-images">
-    <b-row class="">
+    <b-row >
       <b-col class="block-4-images__fullwidth">
         <b-img-lazy
-          src="/fullwidth.png"
+          :src="block.fullwidth.sizes.large"
           fluid
           class="project-cover"
           alt="Project featured Image"
         ></b-img-lazy>
       </b-col>
-    </b-row>
-    <b-row>
+    </b-row >
+    <b-row >
       <b-col class="block-4-images__half">
         <b-img-lazy
-          src="/image-12.png"
+          :src="block.image_14.first_image.sizes.large"
           blank="true"
           blank-color="#bbb"
           fluid
@@ -21,7 +21,7 @@
           alt="Project featured Image"
         ></b-img-lazy>
         <b-img-lazy
-          src="/second-img.png"
+          :src="block.image_14.second_image.sizes.large"
           blank="true"
           blank-color="#bbb"
           fluid
@@ -31,7 +31,7 @@
       </b-col>
       <b-col class="block-4-images__Two-half">
         <b-img-lazy
-          src="/third.png"
+          :src="block.image_12.sizes.large"
           blank="true"
           blank-color="#bbb"
           fluid
@@ -45,13 +45,31 @@
 <script>
 export default {
   name: 'BlocksFourImages',
+  props: {
+    block: {
+      type: Object,
+      required: true,
+    },
+  },
 }
 </script>
 
 <style lang="scss">
 .block-4-images {
-  padding: 0 90px;
-  margin-bottom: 150px;
+  padding: 0 5.625rem;
+  margin-bottom: 9.375rem;
+  @include responsive('desktop'){
+    padding: 0 calc(5.625rem*.75);
+    margin-bottom: calc(9.375rem*.75);
+  }
+   @include responsive('widescreen'){
+    padding: 0 calc(5.625rem*.64);
+    margin-bottom: calc(9.375rem*.64);
+  }
+  @include responsive('tablet'){
+    padding: 0 ;
+    margin-bottom: calc(9.375rem*.51);
+  }
   &__fullwidth {
     margin-bottom: 1.5rem;
     width: 100%;
@@ -63,6 +81,10 @@ export default {
     margin-bottom: 1.5rem;
     display: grid;
     grid-template-rows: 1fr 1fr;
+    @include responsive('tablet'){
+      grid-template-rows: 1fr;
+      min-width: 100%;
+    }
     row-gap: 1.5rem;
     img {
       width: 100%;
