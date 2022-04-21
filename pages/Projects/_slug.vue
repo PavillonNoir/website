@@ -34,10 +34,22 @@
           class="single-project-content__description d-flex flex-column justify-content-between"
         >
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <div class="sub-title" v-html="(projectDetail.acf.description && projectDetail.acf.description.subtitle.paysage) || 'subtitle'"
+          <div
+            class="sub-title"
+            v-html="
+              (projectDetail.acf.description &&
+                projectDetail.acf.description.subtitle.paysage) ||
+              'subtitle'
+            "
           ></div>
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <div class="summary" v-html="(projectDetail.acf.description &&projectDetail.acf.description.summary.paysage) ||'Summary'"
+          <div
+            class="summary"
+            v-html="
+              (projectDetail.acf.description &&
+                projectDetail.acf.description.summary.paysage) ||
+              'Summary'
+            "
           ></div>
         </b-col>
         <b-col md="12" lg="2"></b-col>

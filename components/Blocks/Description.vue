@@ -1,5 +1,11 @@
 <template>
-  <b-row :class="block.orientation === 'right' ? 'justify-content-end' : 'justify-content-start' ">
+  <b-row
+    :class="
+      block.orientation === 'right'
+        ? 'justify-content-end'
+        : 'justify-content-start'
+    "
+  >
     <b-col md="6" class="description">
       <h3 class="title">{{ block.title }}</h3>
       <!-- eslint-disable-next-line vue/no-v-html -->
@@ -18,7 +24,7 @@ export default {
   },
 }
 </script>
-<style lang="scss" >
+<style lang="scss">
 .description {
   padding: 0 5.625rem;
   margin-bottom: 9.375rem;

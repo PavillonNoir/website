@@ -1,14 +1,26 @@
 <template>
-  <div :class="block.video && block.video.orientation ==='boxed' ? 'block-video boxed' : 'block-video '">
+  <div
+    :class="
+      block.video && block.video.orientation === 'boxed'
+        ? 'block-video boxed'
+        : 'block-video '
+    "
+  >
     <video
       ref="blockvideo"
-      :poster="(block.video && block.video.video_poster.url) || (block.poster && block.poster.sizes.large)"
+      :poster="
+        (block.video && block.video.video_poster.url) ||
+        (block.poster && block.poster.sizes.large)
+      "
       preload="none"
       playsinline
       :class="hasBackground ? 'video-player bg-dark' : 'video-player'"
     >
       <source
-        :src="(block.video && block.video.video_url.url) || (block.url && block.url.url)"
+        :src="
+          (block.video && block.video.video_url.url) ||
+          (block.url && block.url.url)
+        "
         type="video/mp4"
       />
       <track

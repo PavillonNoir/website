@@ -1,6 +1,8 @@
 <template>
   <div class="block-3-images">
-    <b-row :class="block.orientation === 'reverse' ? 'flex-row-reverse' : 'flex-row'">
+    <b-row
+      :class="block.orientation === 'reverse' ? 'flex-row-reverse' : 'flex-row'"
+    >
       <b-col class="block-3-images__Two-half">
         <b-img-lazy
           :src="block.image_12 && block.image_12.sizes.large"

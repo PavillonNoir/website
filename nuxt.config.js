@@ -79,9 +79,7 @@ export default {
       },
     ],
   ],
-  
-    
-  
+
   bootstrapVue: {
     icons: false,
   },

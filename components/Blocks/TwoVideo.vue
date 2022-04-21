@@ -32,15 +32,14 @@ export default {
     padding: 0 calc(5.625rem * 0.64);
   }
   @include responsive('tablet') {
-    padding: 0 ;
+    padding: 0;
   }
-  .video_content{
-    
+  .video_content {
     @include responsive('tablet') {
-      column-gap:0;
+      column-gap: 0;
     }
-    .first_video{
-      padding:0;
+    .first_video {
+      padding: 0;
     }
   }
 }

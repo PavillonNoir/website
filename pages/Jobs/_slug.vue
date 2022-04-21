@@ -2,7 +2,7 @@
   <section class="single-job">
     <b-row class="job-infos">
       <h2 class="single-job__title">
-        {{job[0] && job[0].title.rendered}}
+        {{ job[0] && job[0].title.rendered }}
       </h2>
       <ul class="single-job__content-infos">
         <li>Overview</li>
@@ -69,10 +69,10 @@
 <script>
 export default {
   name: 'JobsPage',
-  async asyncData({app, params}){
+  async asyncData({ app, params }) {
     const job = await app.$wp.cpt('job').slug(params.slug).embed()
-    return {job}
-  }
+    return { job }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -98,12 +98,11 @@ export default {
       font-weight: 600;
       color: $primary;
       margin-bottom: 7.5rem;
-      
     }
     .opacity-none {
       opacity: 0;
-      @include responsive('phone'){
-        display:none;
+      @include responsive('phone') {
+        display: none;
       }
     }
   }
@@ -119,17 +118,17 @@ export default {
       position: relative;
     }
   }
-  @include responsive('dekstop'){
-    padding: calc(19.375rem*.75) calc(7.5rem*.75) calc(9.375rem*.75); 
+  @include responsive('dekstop') {
+    padding: calc(19.375rem * 0.75) calc(7.5rem * 0.75) calc(9.375rem * 0.75);
   }
-  @include responsive('widescreen'){
-    padding: calc(19.375rem*.64) calc(7.5rem*.64) calc(9.375rem*.64); 
+  @include responsive('widescreen') {
+    padding: calc(19.375rem * 0.64) calc(7.5rem * 0.64) calc(9.375rem * 0.64);
   }
-  @include responsive('tablet'){
-    padding: calc(19.375rem*.51) calc(7.5rem*.51) calc(9.375rem*.51); 
+  @include responsive('tablet') {
+    padding: calc(19.375rem * 0.51) calc(7.5rem * 0.51) calc(9.375rem * 0.51);
   }
-  @include responsive('phone'){
-    padding: calc(19.375rem*.36) calc(7.5rem*.36) calc(9.375rem*.36); 
+  @include responsive('phone') {
+    padding: calc(19.375rem * 0.36) calc(7.5rem * 0.36) calc(9.375rem * 0.36);
   }
 }
 </style>

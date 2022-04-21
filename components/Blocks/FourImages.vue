@@ -1,6 +1,6 @@
 <template>
   <div class="block-4-images">
-    <b-row >
+    <b-row>
       <b-col class="block-4-images__fullwidth">
         <b-img-lazy
           :src="block.fullwidth.sizes.large"
@@ -9,8 +9,8 @@
           alt="Project featured Image"
         ></b-img-lazy>
       </b-col>
-    </b-row >
-    <b-row >
+    </b-row>
+    <b-row>
       <b-col class="block-4-images__half">
         <b-img-lazy
           :src="block.image_14.first_image.sizes.large"
@@ -58,17 +58,17 @@ export default {
 .block-4-images {
   padding: 0 5.625rem;
   margin-bottom: 9.375rem;
-  @include responsive('desktop'){
-    padding: 0 calc(5.625rem*.75);
-    margin-bottom: calc(9.375rem*.75);
+  @include responsive('desktop') {
+    padding: 0 calc(5.625rem * 0.75);
+    margin-bottom: calc(9.375rem * 0.75);
   }
-   @include responsive('widescreen'){
-    padding: 0 calc(5.625rem*.64);
-    margin-bottom: calc(9.375rem*.64);
+  @include responsive('widescreen') {
+    padding: 0 calc(5.625rem * 0.64);
+    margin-bottom: calc(9.375rem * 0.64);
   }
-  @include responsive('tablet'){
-    padding: 0 ;
-    margin-bottom: calc(9.375rem*.51);
+  @include responsive('tablet') {
+    padding: 0;
+    margin-bottom: calc(9.375rem * 0.51);
   }
   &__fullwidth {
     margin-bottom: 1.5rem;
@@ -81,7 +81,7 @@ export default {
     margin-bottom: 1.5rem;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    @include responsive('tablet'){
+    @include responsive('tablet') {
       grid-template-rows: 1fr;
       min-width: 100%;
     }
