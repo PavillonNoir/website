@@ -109,7 +109,7 @@ export default {
     LazyHydrate,
     BlocksFourImages: () => import('@/components/Blocks/FourImages'),
     BlocksDescription: () => import('@/components/Blocks/Description'),
-    BlocksVideo: () => import('@/components/Blocks/video'),
+    BlocksVideo: () => import('@/components/Blocks/Video'),
     BlocksThreeImages: () => import('@/components/Blocks/ThreeImages'),
     BlocksTwoVideo: () => import('@/components/Blocks/TwoVideo'),
   },
