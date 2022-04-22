@@ -103,27 +103,26 @@ export default {
       // if you want to cache all pages, just include '/'
       '/agency',
       '/projects',
- 
+
       // you can also pass a regular expression to test a path
       /^\/page3\/\d+$/,
- 
+
       // to cache only root route, use a regular expression
-      /^\/$/
+      /^\/$/,
     ],
 
     store: {
       type: 'memory',
- 
+
       // maximum number of pages to store in memory
       // if limit is reached, least recently used page
       // is removed.
       max: 100,
- 
+
       // number of seconds to store this page in cache
       ttl: 60,
     },
   },
- 
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
