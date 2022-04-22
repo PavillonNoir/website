@@ -138,10 +138,11 @@ export default {
       }
       .project-filter {
         opacity: 0;
+        height: 0;
         padding: 0;
 
         &.show {
-          opacity: 1;
+          opacity:1;
           transition: all 0.5s ease;
         }
         li {

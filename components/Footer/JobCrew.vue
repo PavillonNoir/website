@@ -55,7 +55,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(/images/bg-jobcrew.png) no-repeat center center;
+  background: url(/images/bg-jobcrew.webp) no-repeat center center;
   background-size: cover;
   color: $white;
   &-title {
