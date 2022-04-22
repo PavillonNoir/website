@@ -334,7 +334,9 @@
                     />
                     <text
                       id="Marketing_Strategy"
-                      :class="{'d-none': skills.content[3].title == skillText }"
+                      :class="{
+                        'd-none': skills.content[3].title == skillText,
+                      }"
                       data-name="Marketing &amp; Strategy"
                       transform="translate(110 47.635)"
                       fill="#fff"
@@ -466,14 +468,12 @@ export default {
     return {
       skillText: '',
       skillDescription: '',
-      isActive: false,
     }
   },
   methods: {
     getSkillText(skill) {
       this.skillText = skill.title
       this.skillDescription = skill.description
-      this.isActive = !this.isActive;
     },
   },
 }
