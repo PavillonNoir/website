@@ -9,6 +9,7 @@
       class="video-player"
     >
       <source :src="showreel.video_url.url" type="video/mp4" />
+      <track kind="captions" label="English" default />
     </video>
     <svg
       id="button-play"

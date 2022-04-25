@@ -18,7 +18,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .hero {
-  background-color: black;
+  background-color:black;
   height: 1080px;
   // background-image: url(cover.Paysage.sourceUrl);
   background-repeat: no-repeat;

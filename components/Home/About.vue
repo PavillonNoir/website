@@ -31,7 +31,7 @@ export default {
     padding: calc(23.1875rem * 0.51) calc(5.625rem * 0.51);
   }
   @include responsive('phone') {
-    padding: calc(23.1875rem * 0.4) calc(5.625rem * 0.4);
+    padding: 10rem 1.375rem;
   }
   display: flex;
   flex-direction: column;
