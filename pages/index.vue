@@ -37,7 +37,7 @@ export default {
     const catchPhrase = await data[0].acf.catchphrase
     const latestNews = await data[0].acf.latest_news
     const showreel = await data[0].acf.showreel
-    
+
     const latestNewsId = latestNews.map((item) => item.project[0].ID)
     const projects = []
     for (const element of latestNewsId) {
