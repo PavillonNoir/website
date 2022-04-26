@@ -2,8 +2,9 @@
   <div class="showreel">
     <video
       ref="showreelvideo"
+      v-b-visible="playVideo"
       :poster="showreel.video_cover.paysage.sizes.large"
-      preload="none"
+      preload="true"
       playsinline
       muted
       class="video-player"
@@ -48,13 +49,13 @@ export default {
   },
 
   methods: {
-    playVideo() {
+    playVideo(isVisible) {
       const player = this.$refs.showreelvideo
       player.hasAttribute('controls')
         ? player.removeAttribute('controls')
         : player.setAttribute('controls', 'controls')
       // toggle play and pause
-      if (player.paused) {
+      if (isVisible && player.paused) {
         player.play()
         this.showIcon = false
       } else {
