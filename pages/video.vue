@@ -2,7 +2,6 @@
   <div class="showreel">
     <video
       ref="showreelvideo"
-      
       poster="https://preprod.pavillonnoir.com/wp-content/uploads/2022/04/showreel-1024x579.webp"
       preload="true"
       playsinline
@@ -49,7 +48,7 @@ export default {
   methods: {
     playVideo(isVisible) {
       const player = this.$refs.showreelvideo
-      
+
       if (isVisible && player.paused) {
         player.play()
         this.showIcon = false

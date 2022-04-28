@@ -221,7 +221,6 @@ header {
       transform: rotate(180deg);
     }
   }
- 
 
   .navbar {
     .menu-item {
