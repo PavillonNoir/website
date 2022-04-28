@@ -1,11 +1,10 @@
 {
   "name": "pavillon-noir",
   "version": "1.0.0",
-  "private": true, 
+  "private": true,
   "engines": {
     "node": ">=12.0.0 <=15.0.0"
   },
-  
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
