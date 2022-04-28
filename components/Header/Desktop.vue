@@ -217,27 +217,11 @@ header {
   mix-blend-mode: difference !important;
   z-index: 999;
   svg {
-    animation-name: spin;
-
-    :hover {
-      animation-play-state: running;
-      animation-direction: reverse;
-      animation-iteration-count: infinite;
-      animation-duration: 1000ms;
-      animation-timing-function: linear;
-    }
-  }
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    50% {
+    &:hover {
       transform: rotate(180deg);
     }
-    100% {
-      transform: rotate(0deg);
-    }
   }
+ 
 
   .navbar {
     .menu-item {
