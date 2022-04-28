@@ -124,7 +124,6 @@ export default {
     .project-title {
       margin-bottom: 16.75rem;
       padding-left: 5.625rem;
-
       .title {
         @include h2;
       }

@@ -1,8 +1,23 @@
 <template>
   <section
     class="hero"
-    :style="`background-image:url(${cover.Paysage.sizes.large})`"
-  ></section>
+    :style="`background-image:url(${cover.image.paysage.url})`"
+  >
+    <video
+      v-show="cover.type === 'video'"
+      ref="showreelvideo"
+      :poster="cover.image.paysage.url"
+      preload="true"
+      autoplay
+      loop
+      playsinline
+      muted
+      class="cover-video"
+    >
+      <source :src="cover.video.url" type="video/mp4" />
+      <track kind="captions" label="English" default />
+    </video>
+  </section>
 </template>
 
 <script>
@@ -26,6 +41,10 @@ export default {
   background-position-x: center;
   background-position-y: -170px;
   background-origin: padding-box;
+  .cover-video {
+    height: 1080px;
+    max-width: 100%;
+  }
   @include responsive('tablet') {
     //  background-image: url(cover.portrait.sourceUrl);
     height: 667px;

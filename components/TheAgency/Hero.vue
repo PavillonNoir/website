@@ -1,18 +1,18 @@
 <template>
-  <div class="hero">
+  <section class="catchphrase">
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div class="hero-title" v-html="catchphrase.paysage"></div>
+    <div class="catchphrase-title" v-html="catchphrase.paysage"></div>
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div class="hero-title mobile" v-html="catchphrase.portrait"></div>
-    <div class="hero-connect">
-      <p class="hero-connect__title">connect</p>
-      <div class="hero-connect__link">
+    <div class="catchphrase-title mobile" v-html="catchphrase.portrait"></div>
+    <div class="catchphrase-connect">
+      <p class="catchphrase-connect__title">connect</p>
+      <div class="catchphrase-connect__link">
         <a href="mailto:">Jobs</a>
         <a href="mailto:">Briefs</a>
         <a href="mailto:">Talents</a>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 <script>
 export default {
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss">
-.hero {
+.catchphrase {
   padding: 20.625rem 5.625rem 25.625rem;
   &-title > h2 {
     @include h2;
