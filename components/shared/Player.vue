@@ -2,14 +2,18 @@
   <div class="showreel">
     <video
       ref="showreelvideo"
-      v-b-visible="playVideo"
-      :poster="showreel.video_cover.paysage.sizes.large"
+      poster="https://preprod.pavillonnoir.com/wp-content/uploads/2022/04/showreel-1024x579.webp"
       preload="true"
       playsinline
       muted
       class="video-player"
+      step="0.1"
+      @timeupdate="progressbar"
     >
-      <source :src="showreel.video_url.url" type="video/mp4" />
+      <source
+        src="https://preprod.pavillonnoir.com/wp-content/uploads/2022/04/GoNoticed-I-Streetwear-2022-I-Zalando.mp4"
+        type="video/mp4"
+      />
       <track kind="captions" label="English" default />
     </video>
     <div :class="showIcon ? 'd-none' : 'controls d-flex align-items-end'">
@@ -141,13 +145,8 @@
 </template>
 <script>
 export default {
-  name: 'HomeShowreel',
-  props: {
-    showreel: {
-      type: Object,
-      default: null,
-    },
-  },
+  name: 'SharedPlayer',
+
   data() {
     return {
       showIcon: true,
@@ -232,6 +231,15 @@ export default {
     &.inactive {
       display: none;
     }
+    &:hover {
+      transition: all 0.5s ease;
+      circle {
+        fill: $white;
+      }
+      path {
+        fill: $primary;
+      }
+    }
     @include responsive('phone') {
       width: 56px !important;
     }
@@ -256,9 +264,6 @@ export default {
     inset: 0;
     background: transparent;
     bottom: 3rem;
-    @include responsive('phone') {
-      padding: 0 1.5rem;
-    }
 
     #progress-bar::-moz-range-thumb {
       background-color: $white !important;
