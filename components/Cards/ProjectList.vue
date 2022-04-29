@@ -1,42 +1,47 @@
 <template>
-  <div class="cardlist">
-    <div class="left-side">
-      <div class="project-title">
-        <h2 class="title">{{ title }}</h2>
-        <div  @mouseleave="hideFilter">
-          <nuxtLink v-b-hover="showFilter" :to="description.link" class="link"
-            >{{ description.title }}
-            {{ description.filter ? `- ${categoryFiltered}` : '' }}</nuxtLink
-          >
-          <ul
-            v-show="description.filter"
-            :class="showfilter ? 'project-filter show' : 'project-filter'"
-          >
-            <li
-              v-for="(category, index) in categories"
-              :key="index"
-              @click="handleClick"
+  <div class="project-contaoner">
+    <div class="cardlist">
+      <div class="left-side">
+        <div class="project-title">
+          <h2 class="title">{{ title }}</h2>
+          <div @mouseleave="hideFilter">
+            <nuxtLink v-b-hover="showFilter" :to="description.link" class="link"
+              >{{ description.title }}
+              {{ description.filter ? `- ${categoryFiltered}` : '' }}</nuxtLink
             >
-              {{ category }}
-            </li>
-          </ul>
+            <ul
+              v-show="description.filter"
+              :class="showfilter ? 'project-filter show' : 'project-filter'"
+            >
+              <li
+                v-for="(category, index) in categories"
+                :key="index"
+                @click="handleClick"
+              >
+                {{ category }}
+              </li>
+            </ul>
+          </div>
         </div>
+        <CardsProject
+          v-for="(project, index) in leftProjects"
+          :key="index"
+          :project="project"
+          :class="`card-item card-item-${project.id}`"
+          direction="right"
+        />
       </div>
-      <CardsProject
-        v-for="(project, index) in leftProjects"
-        :key="index"
-        :project="project"
-        :class="`card-item card-item-${project.id}`"
-        direction="right"
-      />
+      <div class="right-side">
+        <CardsProject
+          v-for="(project, index) in rightProjects"
+          :key="index"
+          :project="project"
+          :class="`card-item card-item-${project.id}`"
+        />
+      </div>
     </div>
-    <div class="right-side">
-      <CardsProject
-        v-for="(project, index) in rightProjects"
-        :key="index"
-        :project="project"
-        :class="`card-item card-item-${project.id}`"
-      />
+    <div v-show="filterProjects.length === 0" class="no-projects-found">
+      <h2 class="text-center">No projects found</h2>
     </div>
   </div>
 </template>
@@ -81,16 +86,30 @@ export default {
   },
   computed: {
     sizeofArray() {
-      return this.projects.length
+      return this.filterProjects.length
     },
     leftProjects() {
-      return this.projects.slice(0, Math.floor(this.sizeofArray / 2))
+      return this.filterProjects.slice(0, Math.floor(this.sizeofArray / 2))
     },
     rightProjects() {
-      return this.projects.slice(
+      return this.filterProjects.slice(
         Math.floor(this.sizeofArray / 2),
         this.projects.length
       )
+    },
+    filterProjects() {
+      return this.projects.filter((project) => {
+        if (this.categoryFiltered === 'All') {
+          return project
+        } else {
+          return (
+            project.pure_taxonomies.skill &&
+            project.pure_taxonomies.skill.find(
+              (el) => el.name === this.categoryFiltered
+            )
+          )
+        }
+      })
     },
   },
   methods: {
@@ -124,6 +143,9 @@ export default {
     .project-title {
       margin-bottom: 16.75rem;
       padding-left: 5.625rem;
+      @include responsive('phone') {
+        padding: 68px 24px;
+      }
       .title {
         @include h2;
       }
@@ -156,6 +178,7 @@ export default {
     flex-direction: column;
     align-items: flex-end;
   }
+
   @include responsive('widescreen') {
     .left-side {
       .project-title {
@@ -188,6 +211,12 @@ export default {
         padding-left: 1.5625rem;
       }
     }
+  }
+}
+.no-projects-found {
+  h2 {
+    @include h2;
+    text-align: center;
   }
 }
 </style>

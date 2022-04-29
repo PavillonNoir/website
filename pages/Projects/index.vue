@@ -17,7 +17,14 @@
 export default {
   name: 'ProjectGalleryPage',
   async asyncData({ app }) {
-    const projects = await app.$wp.cpt('project').embed()
+    const data = await app.$wp.pages().slug('projects-gallery')
+    const projectsArray = data[0].acf.projects
+    const projectsID = projectsArray.map((item) => item.project.ID)
+    const projects = []
+    for (const element of projectsID) {
+      const project = await app.$wp.cpt('project').id(element).embed()
+      projects.push(project)
+    }
 
     return {
       projects,
@@ -39,7 +46,7 @@ export default {
 .project-container {
   padding: 240px 0;
   @media (max-width: 767px) {
-    padding: 68px 24px;
+    padding: 68px 0;
   }
 }
 </style>
