@@ -20,6 +20,7 @@ export default {
   styleResources: {
     scss: ['~assets/scss/main.scss'],
   },
+  loading: false,
   // Google Fonts
 
   googleFonts: {

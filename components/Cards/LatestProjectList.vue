@@ -42,10 +42,6 @@ export default {
       type: String,
       required: true,
     },
-    description: {
-      type: Object,
-      required: true,
-    },
   },
   data() {
     return {
