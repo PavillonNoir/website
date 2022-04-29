@@ -23,15 +23,114 @@
         "
         type="video/mp4"
       />
-      <track
-        label="English"
-        kind="subtitles"
-        srclang="en"
-        src="captions/vtt/sintel-en.vtt"
-        default
-      />
+      <track label="English" kind="subtitles" srclang="en" default />
     </video>
+    <div :class="showIcon ? 'd-none' : 'controls d-flex align-items-end'">
+      <div
+        class="player-icon d-flex justify-content-center align-items-center col-2"
+      >
+        <button class="icon-play" @click="buttonplay()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            role="img"
+            width="1em"
+            height="1em"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+          >
+            <path
+              fill="white"
+              d="M7 28a1 1 0 0 1-1-1V5a1 1 0 0 1 1.482-.876l20 11a1 1 0 0 1 0 1.752l-20 11A1 1 0 0 1 7 28Z"
+            />
+          </svg>
+        </button>
+        <button class="icon-pause" @click="buttonpause()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            role="img"
+            width="1em"
+            height="1em"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+          >
+            <path
+              fill="white"
+              d="M12 6h-2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm10 0h-2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="col-8">
+        <input
+          id="progress-bar"
+          ref="progressBar"
+          type="range"
+          name="currentTime"
+          class="player-slider"
+          min="0"
+          max="100"
+          value="0"
+          @change="handleRangeChange"
+        />
+      </div>
 
+      <div class="volume-fullscreen d-flex justify-content-center col-2">
+        <button class="icon-volume" @click="muted()">
+          <svg
+            v-show="ismuted"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            role="img"
+            width="1em"
+            height="1em"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="white"
+              d="M4 17h2.697L14 21.868V2.132L6.697 7H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2z"
+            />
+          </svg>
+          <svg
+            v-show="!ismuted"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            role="img"
+            width="1em"
+            height="1em"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="white"
+              d="M16 21c3.527-1.547 5.999-4.909 5.999-9S19.527 4.547 16 3v2c2.387 1.386 3.999 4.047 3.999 7S18.387 17.614 16 19v2z"
+            />
+            <path
+              fill="white"
+              d="M16 7v10c1.225-1.1 2-3.229 2-5s-.775-3.9-2-5zM4 17h2.697L14 21.868V2.132L6.697 7H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2z"
+            />
+          </svg>
+        </button>
+        <button class="icon-fullscreen" @click="fullscreen()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            role="img"
+            width="1em"
+            height="1em"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="white"
+              d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
     <svg
       id="button-play"
       :class="!showIcon ? 'btn-play inactive' : 'btn-play'"
@@ -70,16 +169,13 @@ export default {
   data() {
     return {
       showIcon: true,
+      ismuted: true,
     }
   },
 
   methods: {
     playVideo() {
       const player = this.$refs.blockvideo
-      player.hasAttribute('controls')
-        ? player.removeAttribute('controls')
-        : player.setAttribute('controls', 'controls')
-      // toggle play and pause
       if (player.paused) {
         player.play()
         this.showIcon = false
@@ -88,11 +184,63 @@ export default {
         this.showIcon = true
       }
     },
+    buttonplay() {
+      const player = this.$refs.blockvideo
+      if (player.paused) {
+        player.play()
+        this.showIcon = false
+      }
+    },
+    buttonpause() {
+      const player = this.$refs.blockvideo
+      if (!player.paused) {
+        player.pause()
+        this.showIcon = true
+      }
+    },
+    progressbar() {
+      // animate progress bar when video is playing and pause when video is paused
+      const player = this.$refs.blockvideo
+      const progressBar = this.$refs.progressBar
+      if (player.paused) {
+        progressBar.value = (player.currentTime / player.duration) * 100
+      } else {
+        progressBar.value = (player.currentTime / player.duration) * 100
+      }
+    },
+    muted() {
+      const player = this.$refs.blockvideo
+      if (player.muted) {
+        player.muted = false
+        this.ismuted = false
+      } else {
+        player.muted = true
+        this.ismuted = true
+      }
+    },
+    fullscreen() {
+      const player = this.$refs.blockvideo
+      if (player.requestFullscreen) {
+        player.requestFullscreen()
+      } else if (player.mozRequestFullScreen) {
+        player.mozRequestFullScreen()
+      } else if (player.webkitRequestFullscreen) {
+        player.webkitRequestFullscreen()
+      } else if (player.msRequestFullscreen) {
+        player.msRequestFullscreen()
+      }
+    },
+    handleRangeChange(e) {
+      const player = this.$refs.blockvideo
+      player.currentTime = (e.target.value / 100) * player.duration
+    },
   },
 }
 </script>
 <style lang="scss" scoped>
 .block-video {
+  position: relative;
+  margin-bottom: 150px;
   &.boxed {
     padding: 0 5.625rem;
     @include responsive('desktop') {
@@ -105,8 +253,6 @@ export default {
       padding: 0;
     }
   }
-  position: relative;
-  margin-bottom: 150px;
 
   .btn-play {
     position: absolute;
@@ -140,7 +286,107 @@ export default {
     }
   }
   .controls {
-    display: flex;
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    bottom: 3rem;
+
+    #progress-bar::-moz-range-thumb {
+      background-color: $white !important;
+      border: none;
+      border-radius: 50%;
+      height: 1rem;
+    }
+
+    #progress-bar::-moz-range-progress {
+      background-color: $white !important;
+      height: 2px;
+    }
+    input {
+      height: 2px;
+    }
+    input[type='range'] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+      position: relative;
+      top: -6px;
+    }
+    input[type='range']:focus {
+      outline: none;
+    }
+    input[type='range']::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 2px;
+      cursor: pointer;
+      background: $grey;
+    }
+    input[type='range']::-webkit-slider-thumb {
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -8px;
+    }
+    input[type='range']:focus::-webkit-slider-runnable-track {
+      background: $grey;
+    }
+    input[type='range']::-moz-range-track {
+      width: 100%;
+      height: 2px;
+      cursor: pointer;
+      background: $grey;
+    }
+    input[type='range']::-moz-range-thumb {
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+    }
+    input[type='range']::-ms-track {
+      width: 100%;
+      height: 2px;
+      cursor: pointer;
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+    input[type='range']::-ms-fill-lower {
+      background: #fff;
+
+      border-radius: 2.6px;
+    }
+    input[type='range']::-ms-fill-upper {
+      background: $grey;
+
+      border-radius: 2.6px;
+    }
+    input[type='range']::-ms-thumb {
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background: #ffffff;
+      cursor: pointer;
+    }
+    input[type='range']:focus::-ms-fill-lower {
+      background: #fff;
+    }
+
+    input[type='range']:focus::-ms-fill-upper {
+      background: #fff;
+    }
+    button {
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      svg {
+        font-size: 30px;
+      }
+    }
   }
 }
 </style>
