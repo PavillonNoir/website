@@ -43,7 +43,10 @@
     <div v-show="filterProjects.length === 0" class="no-projects-found">
       <h2 class="text-center">No projects found</h2>
     </div>
-    <div v-if="numberToShow < numberForProjects" class="load-more d-flex justify-content-center">
+    <div
+      v-if="numberToShow < numberForProjects"
+      class="load-more d-flex justify-content-center"
+    >
       <a @click="loadmore">
         <span class="text">Load more</span>
       </a>
