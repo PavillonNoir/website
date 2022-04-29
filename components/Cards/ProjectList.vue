@@ -43,6 +43,11 @@
     <div v-show="filterProjects.length === 0" class="no-projects-found">
       <h2 class="text-center">No projects found</h2>
     </div>
+    <div v-if="numberToShow < numberForProjects" class="load-more d-flex justify-content-center">
+      <a @click="loadmore">
+        <span class="text">Load more</span>
+      </a>
+    </div>
   </div>
 </template>
 <script>
@@ -71,6 +76,7 @@ export default {
     return {
       projectLeftSide: [],
       projectRightSide: [],
+      InitialProjects: [...this.projects],
       showfilter: false,
       categoryFiltered: 'All',
       categories: [
@@ -82,8 +88,11 @@ export default {
         'Creative Technology',
         'Social & Influence',
       ],
+      numberToShow: 5,
+      numberForProjects: 0,
     }
   },
+
   computed: {
     sizeofArray() {
       return this.filterProjects.length
@@ -98,7 +107,7 @@ export default {
       )
     },
     filterProjects() {
-      return this.projects.filter((project) => {
+      return this.projectToload.filter((project) => {
         if (this.categoryFiltered === 'All') {
           return project
         } else {
@@ -111,7 +120,14 @@ export default {
         }
       })
     },
+    projectToload() {
+      return this.InitialProjects.slice(0, this.numberToShow)
+    },
   },
+  mounted() {
+    this.numberForProjects = this.projects.length
+  },
+
   methods: {
     showFilter() {
       this.showfilter = true
@@ -129,6 +145,9 @@ export default {
       this.projectRightSide = this.projectRightSide.filter(
         (item) => item.category === event.target.innerText
       )
+    },
+    loadmore() {
+      this.numberToShow += 5
     },
   },
 }
@@ -217,6 +236,13 @@ export default {
   h2 {
     @include h2;
     text-align: center;
+  }
+}
+.load-more {
+  a {
+    @include link;
+    text-align: center;
+    cursor: pointer;
   }
 }
 </style>
