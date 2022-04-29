@@ -1,11 +1,7 @@
 <template>
   <div class="project-container">
     <div class="project-list">
-      <CardsProjectList
-        :projects="projects"
-        title="Latest News"
-        :description="description"
-      />
+      <CardsLatestProjectList :projects="projects" title="Latest News" />
     </div>
   </div>
 </template>
@@ -74,12 +70,6 @@ export default {
           link: '/agency',
         },
       ],
-      description: {
-        title: 'Featured projects',
-        filter: false,
-        link: '/projects',
-        categories: [],
-      },
     }
   },
 }

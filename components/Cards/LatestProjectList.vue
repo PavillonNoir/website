@@ -3,23 +3,8 @@
     <div class="left-side">
       <div class="project-title">
         <h2 class="title">{{ title }}</h2>
-        <div  @mouseleave="hideFilter">
-          <nuxtLink v-b-hover="showFilter" :to="description.link" class="link"
-            >{{ description.title }}
-            {{ description.filter ? `- ${categoryFiltered}` : '' }}</nuxtLink
-          >
-          <ul
-            v-show="description.filter"
-            :class="showfilter ? 'project-filter show' : 'project-filter'"
-          >
-            <li
-              v-for="(category, index) in categories"
-              :key="index"
-              @click="handleClick"
-            >
-              {{ category }}
-            </li>
-          </ul>
+        <div>
+          <nuxtLink to="/projects" class="link">Featured project</nuxtLink>
         </div>
       </div>
       <CardsProject
@@ -43,7 +28,7 @@
 <script>
 import CardsProject from './Project.vue'
 export default {
-  name: 'CardsProjectList',
+  name: 'CardsLatestProjectList',
 
   components: {
     CardsProject,
