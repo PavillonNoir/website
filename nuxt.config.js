@@ -63,7 +63,7 @@ export default {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/style-resources',
     '@nuxtjs/google-fonts',
-    'nuxt-lazysizes'
+    'nuxt-lazysizes',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -88,16 +88,14 @@ export default {
   },
   lazySizes: {
     plugins: {
-      blurUp: true
+      blurUp: true,
     },
     blurUpClass: 'ls-blur-up-img',
     blurUpLoadingClass: 'ls-blur-up-is-loading',
     blurUpInviewClass: 'ls-inview',
     blurUpLoadedClass: 'ls-blur-up-loaded',
-    blurUpLoadedOriginalClass: 'ls-original-loaded'
-  }
-,
-
+    blurUpLoadedOriginalClass: 'ls-original-loaded',
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
