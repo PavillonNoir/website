@@ -5,7 +5,7 @@
         class="single-project__cover"
         :style="`background-image: url(${
           projectDetail.acf.cover &&
-          projectDetail.acf.cover.image.desktop.sizes.large
+          projectDetail.acf.cover.image.paysage.sizes.large
         });`"
       >
         <h2 class="single-project__cover-title">
@@ -18,7 +18,7 @@
         class="single-project__cover mobile"
         :style="`background-image: url(${
           projectDetail.acf.cover &&
-          projectDetail.acf.cover.image.mobile.sizes.large
+          projectDetail.acf.cover.image.portrait.sizes.large
         });`"
       >
         <h2 class="single-project__cover-title">
