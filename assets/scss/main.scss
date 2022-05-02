@@ -35,3 +35,20 @@ a {
 .d-none {
   transition: all 0.5s ease-in-out;
 }
+.mediabox-img.ls-blur-up-is-loading,
+.mediabox-img.lazyload:not([src]) {
+  visibility: hidden;
+}
+
+
+
+.ls-blur-up-img {
+  filter: blur(10px);
+  opacity: 1;
+  transition: opacity 1000ms, filter 1500ms;
+}
+
+.ls-blur-up-img.ls-inview.ls-original-loaded {
+  opacity: 0;
+  filter: blur(5px);
+}

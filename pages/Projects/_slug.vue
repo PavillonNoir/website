@@ -112,12 +112,14 @@ export default {
     BlocksVideo: () => import('@/components/Blocks/Video'),
     BlocksThreeImages: () => import('@/components/Blocks/ThreeImages'),
     BlocksTwoVideo: () => import('@/components/Blocks/TwoVideo'),
+    BlocksContent: () => import('@/components/Blocks/Content'),
   },
   async asyncData({ app, params }) {
     const project = await app.$wp.cpt('project').slug(params.slug).embed()
     const projectDetail = project[0]
     return { projectDetail }
   },
+
   methods: {
     type(block) {
       if (block === 'block_4_images') {
@@ -134,6 +136,9 @@ export default {
       }
       if (block === 'bloc_2_videos') {
         return 'BlocksTwoVideo'
+      }
+      if (block === 'bloc_1_contenu') {
+        return 'BlocksContent'
       }
     },
     htmlEncode(str) {
