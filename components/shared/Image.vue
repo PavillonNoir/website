@@ -1,6 +1,6 @@
 <template>
-  <div class="image-content">
-    <b-img-lazy v-bind="mainProps" :src="source"></b-img-lazy>
+  <div class="image">
+    <b-img-lazy v-bind="mainProps" :src="source" alt="block Image"></b-img-lazy>
   </div>
 </template>
 

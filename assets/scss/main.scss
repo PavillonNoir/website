@@ -2,6 +2,7 @@
 @import 'variables/global';
 @import 'mixins/typography';
 @import 'mixins/responsive';
+@import 'mixins/marge';
 
 body {
   margin: 0;
@@ -35,18 +36,27 @@ a {
 .d-none {
   transition: all 0.5s ease-in-out;
 }
-.mediabox-img.ls-blur-up-is-loading,
-.mediabox-img.lazyload:not([src]) {
-  visibility: hidden;
+.boxed-large-large {
+  @include marge('boxed', 'large', 'large');
 }
-
-.ls-blur-up-img {
-  filter: blur(10px);
-  opacity: 1;
-  transition: opacity 1000ms, filter 1500ms;
+.boxed-large-small {
+  @include marge('boxed', 'large', 'small');
 }
-
-.ls-blur-up-img.ls-inview.ls-original-loaded {
-  opacity: 0;
-  filter: blur(5px);
+.boxed-small-large {
+  @include marge('boxed', 'small', 'large');
+}
+.boxed-small-small {
+  @include marge('boxed', 'small', 'small');
+}
+.fullwidth-large-large {
+  @include marge('fullwidth', 'large', 'large');
+}
+.fullwidth-large-small {
+  @include marge('fullwidth', 'large', 'small');
+}
+.fullwidth-small-large {
+  @include marge('fullwidth', 'small', 'large');
+}
+.fullwidth-small-small {
+  @include marge('fullwidth', 'small', 'small');
 }
