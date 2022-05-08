@@ -1,12 +1,9 @@
 <template>
-  <div class="two-content">
-      
-  </div>
+  <div class="two-content"></div>
 </template>
 
 <script>
 export default {
-    name: 'BlocksTwoContent',
+  name: 'BlocksTwoContent',
 }
 </script>
-
