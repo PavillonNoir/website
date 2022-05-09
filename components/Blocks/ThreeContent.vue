@@ -192,9 +192,9 @@ export default {
     grid-auto-flow: dense;
     .first-part {
       grid-column: 2;
-        @include responsive('phone') {
-            grid-column: 1;
-        }
+      @include responsive('phone') {
+        grid-column: 1;
+      }
     }
   }
 }
