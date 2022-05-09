@@ -123,9 +123,6 @@ export default {
     LazyHydrate,
 
     BlocksDescription: () => import('@/components/Blocks/Description'),
-
-    BlocksThreeImages: () => import('@/components/Blocks/ThreeImages'),
-    BlocksTwoVideo: () => import('@/components/Blocks/TwoVideo'),
     BlocksContent: () => import('@/components/Blocks/Content'),
     BlocksTwoContent: () => import('@/components/Blocks/TwoContent'),
     BlocksThreeContent: () => import('@/components/Blocks/ThreeContent'),
@@ -140,13 +137,6 @@ export default {
     type(block) {
       if (block === 'block_text') {
         return 'BlocksDescription'
-      }
-
-      if (block === 'bloc_3_images') {
-        return 'BlocksThreeImages'
-      }
-      if (block === 'bloc_2_videos') {
-        return 'BlocksTwoVideo'
       }
       if (block === 'bloc_1_contenu') {
         return 'BlocksContent'
