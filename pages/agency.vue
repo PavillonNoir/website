@@ -14,7 +14,7 @@ export default {
   async asyncData({ app }) {
     const [data, teams, jobs] = await Promise.all([
       app.$wp.pages().slug('the-agency'),
-      app.$wp.cpt('team').embed().order( 'asc' ),
+      app.$wp.cpt('team').embed().order('asc'),
       app.$wp.cpt('job').embed(),
     ])
     const catchPhrase = data[0].acf.catchphrase
