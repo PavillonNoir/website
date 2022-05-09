@@ -8,6 +8,20 @@
           projectDetail.acf.cover.image.paysage.sizes.large
         });`"
       >
+        <video
+          v-show="projectDetail.acf.cover.type === 'video'"
+          ref="showreelvideo"
+          :poster="projectDetail.acf.cover.image.paysage.url"
+          preload="true"
+          autoplay
+          loop
+          playsinline
+          muted
+          class="cover-video"
+        >
+          <source :src="projectDetail.acf.cover.video.url" type="video/mp4" />
+          <track kind="captions" label="English" default />
+        </video>
         <h2 class="single-project__cover-title">
           {{ projectDetail.title.rendered || 'Project title' }}
         </h2>
@@ -107,12 +121,14 @@ export default {
   name: 'SingleProject',
   components: {
     LazyHydrate,
-    BlocksFourImages: () => import('@/components/Blocks/FourImages'),
+
     BlocksDescription: () => import('@/components/Blocks/Description'),
-    BlocksVideo: () => import('@/components/Blocks/Video'),
+
     BlocksThreeImages: () => import('@/components/Blocks/ThreeImages'),
     BlocksTwoVideo: () => import('@/components/Blocks/TwoVideo'),
     BlocksContent: () => import('@/components/Blocks/Content'),
+    BlocksTwoContent: () => import('@/components/Blocks/TwoContent'),
+    BlocksThreeContent: () => import('@/components/Blocks/ThreeContent'),
   },
   async asyncData({ app, params }) {
     const project = await app.$wp.cpt('project').slug(params.slug).embed()
@@ -122,15 +138,10 @@ export default {
 
   methods: {
     type(block) {
-      if (block === 'block_4_images') {
-        return 'BlocksFourImages'
-      }
       if (block === 'block_text') {
         return 'BlocksDescription'
       }
-      if (block === 'bloc_video') {
-        return 'BlocksVideo'
-      }
+
       if (block === 'bloc_3_images') {
         return 'BlocksThreeImages'
       }
@@ -139,6 +150,12 @@ export default {
       }
       if (block === 'bloc_1_contenu') {
         return 'BlocksContent'
+      }
+      if (block === 'bloc_2_contenu') {
+        return 'BlocksTwoContent'
+      }
+      if (block === 'bloc_3_contenu') {
+        return 'BlocksThreeContent'
       }
     },
     htmlEncode(str) {
@@ -155,10 +172,23 @@ export default {
     background-color: $primary;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 1080px;
+    @include responsive('desktop') {
+      height: calc(1080px * 0.75);
+    }
+    @include responsive('widescreen') {
+      height: calc(1080px * 0.64);
+    }
+    @include responsive('tablet') {
+      height: calc(1080px * 0.51);
+    }
+    @include responsive('phone') {
+      height: calc(1080px * 0.35);
+    }
     &::after {
       content: '';
       position: absolute;

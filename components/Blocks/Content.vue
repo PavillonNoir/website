@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       classStyle: {
-        class: 'image-content',
+        class: 'block-content image-content ',
       },
     }
   },
