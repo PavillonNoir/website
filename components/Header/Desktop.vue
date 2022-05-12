@@ -213,7 +213,7 @@ header {
   align-items: center;
   position: fixed;
   width: 100%;
-  padding: 1.875rem 5.625rem;
+  padding: 1.875rem 6.225rem 0 5.625rem;
   mix-blend-mode: difference !important;
   z-index: 999;
   svg {
@@ -226,9 +226,13 @@ header {
     .menu-item {
       @include nav;
       color: $white;
-      margin: 0 30px;
-      font-weight: 600;
+      margin: 0 30px 0 0;
+      font-weight: 400;
       letter-spacing: 2.5px;
+      &:hover {
+        color: $white;
+        text-decoration: underline;
+      }
     }
     @media (max-width: 768px) {
       display: none;

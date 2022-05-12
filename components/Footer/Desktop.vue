@@ -46,7 +46,7 @@
           </form>
         </div>
       </div>
-      <div class="footer-item footer-info col-md-12 col-lg-5">
+      <div class="footer-item footer-info col-md-12 col-lg-6">
         <div class="footer-item__adress">
           <h3 class="footer-title">Address</h3>
           <address class="footer-text">{{ address }}</address>
@@ -154,6 +154,7 @@ export default {
 <style lang="scss">
 .footer {
   &-container {
+    max-height: 300px;
     padding: 5.125rem 5.625rem 5.5rem;
     background-color: $primary;
     display: flex;
@@ -162,6 +163,7 @@ export default {
     row-gap: 1.875rem;
     @media (max-width: 767px) {
       padding: 82px 30px 88px;
+      max-height: 100%;
     }
   }
   &-info {
@@ -169,7 +171,19 @@ export default {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 8.125rem;
     grid-row-gap: 2.5rem;
-    @media (max-width: 767px) {
+    @include responsive('widescreen') {
+      grid-column-gap: calc(8.125rem * 0.75);
+      grid-row-gap: calc(2.5rem * 0.75);
+    }
+    @include responsive('desktop') {
+      grid-column-gap: calc(8.125rem * 0.64);
+      grid-row-gap: calc(2.5rem * 0.64);
+    }
+    @include responsive('tablet') {
+      grid-column-gap: calc(8.125rem * 0.51);
+      grid-row-gap: calc(2.5rem * 0.51);
+    }
+    @include responsive('phone') {
       grid-template-columns: 1fr;
       grid-column-gap: 28px;
       grid-row-gap: 28px;
@@ -185,7 +199,7 @@ export default {
   &-text {
     @include footer;
     color: $white;
-    font-weight: 600;
+    font-weight: 400;
     span {
       margin-right: 1.25rem;
       a {

@@ -1,12 +1,12 @@
 <template>
   <div class="jobs">
-    <h2 class="jobs-title">join our crew</h2>
+    <h2 class="jobs-title">Join our crew</h2>
     <div class="jobs-connect__link">
       <a
         v-for="(connectLink, index) in connectLinks"
         :key="index"
-        :href="`mailto:${connectLink.mail}`"
-        >{{ connectLink.title }}</a
+        :href="`mailto:${connectLink.connect_link}`"
+        >{{ connectLink.connect_label }}</a
       >
     </div>
     <div class="jobs-posts">
@@ -30,21 +30,15 @@ export default {
   },
   data() {
     return {
-      connectLinks: [
-        {
-          title: 'Jobs',
-          mail: 'jobs@test.com',
-        },
-        {
-          title: 'Briefs',
-          mail: 'Briefs@test.com',
-        },
-        {
-          title: 'Talents',
-          mail: 'talents@test.com',
-        },
-      ],
+      connectLinks: [],
     }
+  },
+  async fetch() {
+    const data = await this.$wp.cpt('website-info').slug('footer')
+    this.connectLinks = await data[0].acf.connect
+  },
+  mounted() {
+    this.$fetch()
   },
 }
 </script>
@@ -71,6 +65,11 @@ export default {
       @include link;
       margin-right: 30px;
       color: $white;
+      text-decoration: underline;
+      transition: all 0.3s ease;
+      &:hover {
+        font-weight: 600;
+      }
     }
   }
   &-posts {
@@ -88,6 +87,9 @@ export default {
       text-align: center;
       border-top: 1px solid $white;
       padding: 20px 0;
+      &:hover {
+        text-decoration: underline;
+      }
       &:last-child {
         border-bottom: 1px solid $white;
       }

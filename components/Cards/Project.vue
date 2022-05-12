@@ -41,7 +41,13 @@
             project._embedded['wp:term'][0][0].name
           }}</span
           ><br />
-          <span class="project-text__title">{{ project.title.rendered }}</span>
+          <span
+            class="project-text__title"
+            :style="showfilter && 'text-decoration:underline'"
+            @mouseover="showFilter"
+            @mouseleave="hideFilter"
+            >{{ project.title.rendered }}</span
+          >
         </h2>
       </div>
     </div>
@@ -100,7 +106,7 @@ export default {
       }
       &__title {
         @include h3;
-        font-weight: 400 !important;
+        font-weight: 500 !important;
         font-family: $NoeDisplay;
       }
     }

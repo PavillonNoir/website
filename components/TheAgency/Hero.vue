@@ -7,9 +7,12 @@
     <div class="catchphrase-connect">
       <p class="catchphrase-connect__title">connect</p>
       <div class="catchphrase-connect__link">
-        <a href="mailto:">Jobs</a>
-        <a href="mailto:">Briefs</a>
-        <a href="mailto:">Talents</a>
+        <a
+          v-for="(connectLink, index) in connectLinks"
+          :key="index"
+          :href="`mailto:${connectLink.connect_link}`"
+          >{{ connectLink.connect_label }}</a
+        >
       </div>
     </div>
   </section>
@@ -23,6 +26,18 @@ export default {
       default: null,
     },
   },
+  data() {
+    return {
+      connectLinks: [],
+    }
+  },
+  async fetch() {
+    const data = await this.$wp.cpt('website-info').slug('footer')
+    this.connectLinks = await data[0].acf.connect
+  },
+  mounted() {
+    this.$fetch()
+  },
 }
 </script>
 
@@ -31,7 +46,7 @@ export default {
   padding: 20.625rem 5.625rem 25.625rem;
   &-title > h2 {
     @include h2;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.9375rem;
     @include responsive('phone') {
       display: none;
     }
@@ -53,18 +68,21 @@ export default {
       @include caption;
       margin-bottom: 0.25rem;
       color: $tertiary;
-      font-weight: 700;
+      font-weight: 400;
       text-transform: uppercase;
     }
     &__link {
       display: flex;
       a {
-        @include body;
+        @include link;
         color: $primary;
-        font-weight: 600;
+        font-weight: 400;
         margin-right: 1.25rem;
         margin-top: 0.625rem;
         text-decoration: underline;
+        &:hover {
+          font-weight: 600;
+        }
       }
     }
   }

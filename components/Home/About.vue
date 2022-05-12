@@ -40,13 +40,17 @@ export default {
   h2 {
     @include h2;
     text-align: center !important;
-    font-weight: 500;
+    font-weight: 600 !important;
     margin-bottom: 0.4375rem;
+    color: $primary;
   }
   .about-link {
     @include link;
     color: $primary;
     text-decoration: underline;
+    &:hover{
+      font-weight: 600;
+    }
   }
   .about-title {
     @media (max-width: 768px) {

@@ -34,14 +34,20 @@
               width="133.76px"
               height="133.76px"
             />
-            <p class="text-center text-light">{{ activity.caption }}</p>
+            <p class="text-center text-light activity-caption">
+              {{ activity.caption }}
+            </p>
           </div>
         </b-col>
       </div>
       <div
         class="skills-and-360__content-360 spacing d-flex flex-wrap justify-content-between"
       >
-        <b-col md="12" lg="4" class="skills-and-360__content-360-title">
+        <b-col
+          md="12"
+          lg="4"
+          class="skills-and-360__content-360-title skill-text"
+        >
           <h2 class="title text-light">Our Skills</h2>
           <!-- eslint-disable-next-line vue/no-v-html -->
           <div
@@ -54,7 +60,7 @@
             v-html="skills.title.paysage"
           ></div>
         </b-col>
-        <b-col md="12" lg="5" class="skills-and-360__content-360-content">
+        <b-col md="12" lg="4" class="skills-and-360__content-360-content">
           <div class="skill-svg">
             <svg
               class="skill-svg-item"
@@ -132,9 +138,9 @@
                 class="skill-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink"
-                width="500"
-                height="450"
-                viewBox="0 0 800 776"
+                width="595.439"
+                height="695.688"
+                viewBox="0 0 800 676"
               >
                 <defs>
                   <clipPath id="clip-path">
@@ -215,7 +221,7 @@
                       font-size="18"
                       font-family="IBMPlexMono-Bold, IBM Plex Mono"
                       letter-spacing="0.01em"
-                      font-weight="700"
+                      font-weight="400"
                       @click="getSkillText(skills.content[5])"
                     >
                       <tspan x="0" y="0">{{ skills.content[5].title }}</tspan>
@@ -226,6 +232,7 @@
                       d="M121.329,171.431l97.747,58.9c41.932,25.142,34.2,58.369,32.271,64.693-.218.706-.352,1.058-.352,1.058l10.1-8.773a112.742,112.742,0,0,1,39.569-18.467c30.357-7.581,51.593-.167,54.543.957-2.381-2.062-18.917-17.326-26.534-47.668a112.442,112.442,0,0,1-2.33-43.594l2.986-13.049s-.253.286-.772.822c-4.679,4.682-30.342,27.139-72.274,1.979l-64.636-38.955Z"
                       transform="translate(-121.329 -129.332)"
                       fill="#222"
+                      @click="getSkillText(skills.content[5])"
                     />
                   </g>
                   <g
@@ -243,7 +250,7 @@
                       font-size="18"
                       font-family="IBMPlexMono-Bold, IBM Plex Mono"
                       letter-spacing="0.01em"
-                      font-weight="700"
+                      font-weight="400"
                       @click="getSkillText(skills.content[1])"
                     >
                       <tspan x="-175.5" y="0">
@@ -256,6 +263,7 @@
                       d="M233.874,172.37l-97.747-58.9C94.2,88.328,101.928,55.1,103.856,48.777c.218-.706.352-1.058.352-1.058l-10.1,8.773A112.742,112.742,0,0,1,54.543,74.959C24.186,82.54,2.95,75.126,0,74c2.381,2.062,18.917,17.326,26.534,47.668a112.441,112.441,0,0,1,2.33,43.595l-2.986,13.049s.253-.286.772-.822c4.679-4.682,30.342-27.139,72.274-1.979l64.636,38.955Z"
                       transform="translate(68.493 -4.744)"
                       fill="#222"
+                      @click="getSkillText(skills.content[1])"
                     />
                   </g>
                   <g
@@ -273,7 +281,7 @@
                       font-size="18"
                       font-family="IBMPlexMono-Bold, IBM Plex Mono"
                       letter-spacing="0.01em"
-                      font-weight="700"
+                      font-weight="400"
                       @click="getSkillText(skills.content[4])"
                     >
                       <tspan x="-120.6" y="0">
@@ -286,6 +294,7 @@
                       d="M233.874,171.431l-97.747,58.9c-41.932,25.142-34.2,58.369-32.271,64.693.218.706.352,1.058.352,1.058l-10.1-8.773a112.742,112.742,0,0,0-39.569-18.467C24.186,261.26,2.95,268.674,0,269.8c2.381-2.062,18.917-17.326,26.534-47.668a112.441,112.441,0,0,0,2.33-43.594l-2.986-13.049s.253.286.772.822c4.679,4.682,30.342,27.139,72.274,1.979l64.636-38.955Z"
                       transform="translate(14.493 -129.332)"
                       fill="#222"
+                      @click="getSkillText(skills.content[4])"
                     />
                   </g>
                   <g
@@ -304,7 +313,7 @@
                       font-family="IBMPlexMono-Bold, IBM Plex Mono"
                       letter-spacing="0.01em"
                       opacity="0.998"
-                      font-weight="700"
+                      font-weight="400"
                       @click="getSkillText(skills.content[6])"
                     >
                       <tspan x="-93.24" y="0">
@@ -317,6 +326,7 @@
                       d="M226.607,258.516S201.56,253.8,177.7,229.931,150.39,182.3,150.39,182.3s-3.442,23.769-27.3,47.629-48.911,28.584-48.911,28.584,25.047,4.72,48.911,28.584,27.3,47.629,27.3,47.629l.051-.3c.495-2.837,4.971-25.041,27.255-47.326,23.864-23.864,48.911-28.584,48.911-28.584"
                       transform="translate(-58.638 -182.302)"
                       fill="#222"
+                      @click="getSkillText(skills.content[6])"
                     />
                   </g>
                   <g
@@ -331,6 +341,7 @@
                       d="M147.092,102.212,76.278,144.731l70.814,42.519,70.817-42.519Z"
                       transform="translate(-37.476 -102.212)"
                       fill="#222"
+                      :class="{ active: skills.content[3].title == skillText }"
                     />
                     <text
                       id="Marketing_Strategy"
@@ -343,7 +354,7 @@
                       font-size="18"
                       font-family="IBMPlexMono-Bold, IBM Plex Mono"
                       letter-spacing="0.01em"
-                      font-weight="700"
+                      font-weight="400"
                       @click="getSkillText(skills.content[3])"
                     >
                       <tspan x="-109.71" y="0">
@@ -366,7 +377,7 @@
                       font-size="18"
                       font-family="IBMPlexMono-Bold, IBM Plex Mono"
                       letter-spacing="0.01em"
-                      font-weight="700"
+                      font-weight="400"
                       @click="getSkillText(skills.content[2])"
                     >
                       <tspan x="0" y="0">{{ skills.content[2].title }}</tspan>
@@ -377,6 +388,7 @@
                       d="M121.329,172.37l97.747-58.9c41.932-25.142,34.2-58.369,32.271-64.693-.218-.706-.352-1.058-.352-1.058l10.1,8.773A112.742,112.742,0,0,0,300.66,74.959c30.357,7.581,51.593.167,54.543-.957-2.381,2.062-18.917,17.326-26.534,47.668a112.442,112.442,0,0,0-2.33,43.595l2.986,13.049s-.253-.286-.772-.822c-4.679-4.682-30.342-27.139-72.274-1.979l-64.636,38.955Z"
                       transform="translate(-121.329 -4.744)"
                       fill="#222"
+                      @click="getSkillText(skills.content[2])"
                     />
                   </g>
                   <g
@@ -394,7 +406,7 @@
                       font-size="18"
                       font-family="IBMPlexMono-Bold, IBM Plex Mono"
                       letter-spacing="0.01em"
-                      font-weight="700"
+                      font-weight="400"
                       @click="getSkillText(skills.content[0])"
                     >
                       <tspan x="-98.73" y="0">
@@ -407,6 +419,7 @@
                       d="M226.607,76.213S201.56,71.492,177.7,47.628,150.39,0,150.39,0s-3.442,23.769-27.3,47.629S74.176,76.213,74.176,76.213s25.047,4.723,48.911,28.587,27.3,47.629,27.3,47.629l.051-.3c.495-2.837,4.971-25.041,27.255-47.325,23.864-23.864,48.911-28.587,48.911-28.587"
                       transform="translate(-51.638 42.77)"
                       fill="#222"
+                      @click="getSkillText(skills.content[0])"
                     />
                   </g>
                 </g>
@@ -442,10 +455,17 @@
             </div>
           </div>
         </b-col>
-        <b-col md="12" lg="3" class="skills-and-360__content-360-title">
-          <h3 class="text-white">{{ skillText }}</h3>
+        <b-col
+          md="12"
+          lg="4"
+          class="skills-and-360__content-360-title skill-text spacing-7"
+        >
+          <h3 class="text-white decription-skill-title">{{ skillText }}</h3>
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <div class="text-white" v-html="skillDescription"></div>
+          <div
+            class="text-white description-skill"
+            v-html="skillDescription"
+          ></div>
         </b-col>
       </div>
     </div>
@@ -496,12 +516,15 @@ export default {
 
         h3,
         span {
-          @include link;
+          @include caption;
           text-decoration: none;
           &:hover {
             text-decoration: none;
           }
         }
+      }
+      .accordion__content {
+        @include body;
       }
     }
   }
@@ -614,5 +637,32 @@ export default {
 }
 .first-skill {
   display: flex;
+}
+.activity-caption {
+  @include caption;
+  line-height: 1.1875rem;
+  letter-spacing: 1px;
+}
+.skill-text {
+  margin-top: 10rem;
+  &.spacing-7 {
+    padding-left: 7rem;
+  }
+  @include responsive('phone') {
+    margin-top: 0;
+    &.spacing-7 {
+      padding-left: 0;
+    }
+  }
+}
+.decription-skill-title {
+  @include body;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+.description-skill {
+  @include body;
 }
 </style>

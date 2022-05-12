@@ -50,25 +50,30 @@ export default {
       .firstname,
       .lastname {
         @include h3;
-        font-weight: 500;
+        font-weight: 600;
         margin-bottom: 4px;
         text-align: center;
       }
       .position {
         @include link;
-        font-family: $IBMPlexMono;
         margin-bottom: 4px;
         text-align: center;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 400;
+        &:hover{
+          text-decoration:none;
+        }
       }
       .link {
         @include footer-caption;
         color: $primary;
-        font-weight: 600;
+        font-weight: 400;
         margin-top: 10px;
         color: $tertiary;
         text-transform: uppercase;
+        &:hover{
+          text-decoration: underline;
+        }
       }
     }
   }

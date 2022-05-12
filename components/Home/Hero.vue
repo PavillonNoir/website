@@ -34,21 +34,18 @@ export default {
 <style lang="scss" scoped>
 .hero {
   background-color: black;
-  height: 1080px;
-  // background-image: url(cover.Paysage.sourceUrl);
+  height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: center;
-  background-position-y: -170px;
+  background-position-y: center;
   background-origin: padding-box;
   .cover-video {
-    height: 1080px;
+    height: 100vh;
     max-width: 100%;
   }
   @include responsive('tablet') {
-    //  background-image: url(cover.portrait.sourceUrl);
     height: 667px;
-    background-position-y: center;
   }
 }
 </style>

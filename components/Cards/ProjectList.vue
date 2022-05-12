@@ -44,7 +44,7 @@
       <h2 class="text-center">No projects found</h2>
     </div>
     <div
-      v-if="numberToShow < numberForProjects"
+      v-if="filterProjects.length <= numberForProjects"
       class="load-more d-flex justify-content-center"
     >
       <a @click="loadmore">

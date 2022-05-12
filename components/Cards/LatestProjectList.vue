@@ -4,7 +4,7 @@
       <div class="project-title">
         <h2 class="title">{{ title }}</h2>
         <div>
-          <nuxtLink to="/projects" class="link">Featured project</nuxtLink>
+          <nuxtLink to="/projects" class="link">Featured projects</nuxtLink>
         </div>
       </div>
       <CardsProject
@@ -107,13 +107,17 @@ export default {
       padding-left: 5.625rem;
       .title {
         @include h2;
+        color: $primary;
+        font-weight: 600;
       }
       .link {
         @include link;
-        text-decoration: none;
+        text-decoration: underline;
         transition: all 0.3s ease;
-        :hover {
+        font-weight: 500;
+        &:hover {
           text-decoration: underline !important;
+          font-weight: 700;
         }
       }
       .project-filter {
