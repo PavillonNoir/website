@@ -75,7 +75,7 @@
     line-height: calc(1.5rem * 0.64);
   }
   @include responsive('phone') {
-    font-size: .875rem;
+    font-size: 0.875rem;
     line-height: 1.25rem;
   }
 }

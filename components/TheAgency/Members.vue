@@ -60,8 +60,8 @@ export default {
         text-align: center;
         text-decoration: none;
         font-weight: 400;
-        &:hover{
-          text-decoration:none;
+        &:hover {
+          text-decoration: none;
         }
       }
       .link {
@@ -71,7 +71,7 @@ export default {
         margin-top: 10px;
         color: $tertiary;
         text-transform: uppercase;
-        &:hover{
+        &:hover {
           text-decoration: underline;
         }
       }
