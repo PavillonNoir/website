@@ -4,11 +4,12 @@
       <div class="footer-item footer-newsletter footer-newsletter-mobile">
         <div class="footer-item__newsletter">
           <h2 class="footer-title">GET OUR NEWS</h2>
-          <form class="newsletter">
+          <form class="newsletter" @submit.prevent="handleSubmit">
             <input
+              v-model="email"
               type="email"
+              name="email"
               placeholder="Your email Address"
-              name="newsletter"
             />
             <button type="submit">
               <svg
@@ -45,6 +46,12 @@
             </button>
           </form>
         </div>
+        <span v-show="error" class="error">
+          {{ error }}
+        </span>
+        <span v-show="success" class="success">
+          {{ success }}
+        </span>
       </div>
       <div class="footer-item footer-info col-md-12 col-lg-6">
         <div class="footer-item__adress">
@@ -64,7 +71,9 @@
         </div>
         <div class="footer-item__phone">
           <h3 class="footer-title">Phone</h3>
-          <p class="footer-text">{{ phoneNumber }}</p>
+          <p class="footer-text">
+            <a :href="`tel:${phoneNumber.trim()}`"></a> {{ phoneNumber }}
+          </p>
         </div>
         <div class="footer-item__social">
           <h3 class="footer-title">Follow us</h3>
@@ -80,8 +89,13 @@
       <div class="footer-item footer-newsletter">
         <div class="footer-item__newsletter">
           <h3 class="footer-title">GET OUR NEWS</h3>
-          <form class="newsletter">
-            <input type="email" placeholder="Your email Address" />
+          <form class="newsletter" @submit.prevent="handleSubmit">
+            <input
+              v-model="email"
+              type="email"
+              name="email"
+              placeholder="Your email Address"
+            />
             <button type="submit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +131,12 @@
             </button>
           </form>
         </div>
+        <span v-show="error" class="error">
+          {{ error }}
+        </span>
+        <span v-show="success" class="success">
+          {{ success }}
+        </span>
       </div>
 
       <div class="footer-item footer-item__mentions">
@@ -137,6 +157,9 @@ export default {
       address: '',
       phoneNumber: '',
       date: new Date().getFullYear(),
+      email: '',
+      error: '',
+      success: '',
     }
   },
   async fetch() {
@@ -148,6 +171,33 @@ export default {
   },
   mounted() {
     this.$fetch()
+  },
+  methods: {
+    handleSubmit(e) {
+      e.preventDefault()
+      // eslint-disable-next-line no-useless-escape
+      if (this.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+        this.$wp
+          .cpt('subscriber')
+          .create({
+            title: this.email,
+            status: 'publish',
+          })
+          .then((response) => {
+            this.email = ''
+            this.error = ''
+            this.success = 'Thank you for subscribing!'
+            setTimeout(() => {
+              this.success = ''
+            }, 2000)
+          })
+          .catch((err) => {
+            this.error = err.message
+          })
+      } else {
+        this.error = 'Please enter a valid email'
+      }
+    },
   },
 }
 </script>
@@ -217,7 +267,10 @@ export default {
       @include footer;
       margin-right: 1.875rem;
       color: $white;
-      font-weight: 600;
+      font-weight: 400;
+      &:hover {
+        font-weight: 600;
+      }
     }
   }
   &-newsletter {
@@ -226,6 +279,7 @@ export default {
     }
   }
   &-item__newsletter {
+    margin-bottom: 24px;
     .newsletter {
       padding-bottom: 10.5px;
       border-bottom: 2px solid $tertiary;
@@ -338,6 +392,7 @@ export default {
     &-newsletter {
       width: 100%;
       display: none;
+      margin-bottom: 28px;
       &.footer-newsletter-mobile {
         display: block;
         margin-bottom: 28px;
@@ -346,6 +401,19 @@ export default {
     .jobs-connect__link {
       margin-bottom: calc(3.75rem * 0.35);
     }
+  }
+  address {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .error {
+    color: red;
+    @include body;
+  }
+  .success {
+    color: green;
+    @include body;
   }
 }
 </style>

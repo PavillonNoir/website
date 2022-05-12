@@ -48,6 +48,7 @@ export default {
     @include link;
     color: $primary;
     text-decoration: underline;
+    margin-top: 1.5rem;
     &:hover {
       font-weight: 600;
     }
