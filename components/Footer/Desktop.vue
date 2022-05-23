@@ -205,12 +205,27 @@ export default {
 .footer {
   &-container {
     max-height: 300px;
-    padding: 5.125rem 5.625rem 5.5rem;
+    padding: 5.125rem 5.625rem 5.4375rem;
     background-color: $primary;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     row-gap: 1.875rem;
+    @include responsive('widescreen') {
+      padding: calc(5.125rem * 0.75) calc(5.625rem * 0.75)
+        calc(5.4375rem * 0.75);
+      row-gap: calc(1.875rem * 0.75);
+    }
+    @include responsive('desktop') {
+      padding: calc(5.125rem * 0.64) calc(5.625rem * 0.64)
+        calc(5.4375rem * 0.64);
+      row-gap: calc(1.875rem * 0.64);
+    }
+    @include responsive('tablet') {
+      padding: calc(5.125rem * 0.51) calc(5.625rem * 0.51)
+        calc(5.4375rem * 0.51);
+      row-gap: calc(1.875rem * 0.51);
+    }
     @media (max-width: 767px) {
       padding: 82px 30px 88px;
       max-height: 100%;

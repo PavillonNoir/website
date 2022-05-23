@@ -2,7 +2,7 @@
   <div class="showreel">
     <video
       ref="showreelvideo"
-      v-b-visible="playVideo"
+      
       :poster="showreel.video_cover.paysage.sizes.large"
       preload="true"
       playsinline
