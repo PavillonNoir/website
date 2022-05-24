@@ -75,10 +75,10 @@ export default {
     [
       'wp-nuxt',
       {
-        endpoint: 'https://preprod.pavillonnoir.com/wp-json/',
+        endpoint: process.env.NUXT_ENV_API_URL,
         extensions: true,
-        username: 'Gustave',
-        password: '0WFV hf1i gdmD 8tk8 Hjpb sf6x',
+        username: process.env.NUXT_ENV_USERNAME,
+        password: process.env.NUXT_ENV_PASSWORD,
       },
     ],
     'nuxt-ssr-cache',
