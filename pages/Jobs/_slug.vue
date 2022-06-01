@@ -1,9 +1,7 @@
 <template>
   <section class="single-job">
     <b-row class="job-infos">
-      <h2 class="single-job__title">
-        {{ job[0] && job[0].title.rendered }}
-      </h2>
+      <h2 class="single-job__title" v-html="job[0].title.rendered"></h2>
       <div class="single-job__content-infos" v-html="jobAcf.description"></div>
     </b-row>
     <b-row>
@@ -18,7 +16,9 @@
           class="single-job__content-details"
           v-html="jobAcf.requirements"
         ></div>
-        <a href="mailto:" class="single-job__apply">Apply</a>
+        <a href="mailto:jobs@pavillonnoir.com" class="single-job__apply"
+          >Apply</a
+        >
       </b-col>
     </b-row>
   </section>
@@ -30,7 +30,6 @@ export default {
   async asyncData({ app, params }) {
     const job = await app.$wp.cpt('job').slug(params.slug).embed()
     const jobAcf = await job[0].acf
-    console.log(jobAcf)
     return { job, jobAcf }
   },
 }

@@ -1,11 +1,12 @@
 <template>
-  <NuxtLink :to="`/projects/${project.slug}`" class="project-link">
-    <div class="project">
+  <NuxtLink :to="`/projects/${project[0].slug}`" class="project-link">
+    <div v-show="project" class="project">
       <div class="card-image" @mouseover="showFilter" @mouseleave="hideFilter">
         <b-img-lazy
           :src="
-            project._embedded['wp:featuredmedia'] &&
-            project._embedded['wp:featuredmedia'][0].source_url
+            (project[0]._embedded['wp:featuredmedia'] &&
+              project[0]._embedded['wp:featuredmedia'][0].source_url) ||
+            ''
           "
           blank="true"
           blank-color="#bbb"
@@ -22,7 +23,7 @@
           :style="showfilter && 'transform: translateX(0)'"
         >
           <b-img-lazy
-            :src="project.acf.logo_client.sizes.medium"
+            :src="project[0].acf.logo_client.sizes.medium"
             fluid
             class="project-client__logo"
             alt="Logo  Client"
@@ -38,7 +39,7 @@
       >
         <h2 class="project-text">
           <span class="project-text__client">{{
-            project._embedded['wp:term'][0][0].name
+            project[0]._embedded['wp:term'][0][0].name
           }}</span
           ><br />
           <span
@@ -46,7 +47,7 @@
             :style="showfilter && 'text-decoration:underline'"
             @mouseover="showFilter"
             @mouseleave="hideFilter"
-            >{{ project.title.rendered }}</span
+            >{{ project[0].title.rendered }}</span
           >
         </h2>
       </div>
@@ -58,7 +59,7 @@ export default {
   name: 'CardsProject',
   props: {
     project: {
-      type: Object,
+      type: Array,
       required: true,
     },
     direction: {

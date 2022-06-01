@@ -18,18 +18,22 @@ export default {
   name: 'ProjectGalleryPage',
   async asyncData({ app }) {
     const data = await app.$wp.pages().slug('projects-gallery')
+    
     const projectsArray = data[0].acf.projects
-    const projectsID = projectsArray.map((item) => item.project.ID)
+    const projectsID = projectsArray.map((item) => item.project.post_name)
     const projects = []
     for (const element of projectsID) {
-      const project = await app.$wp.cpt('project').id(element).embed()
+      const project = await app.$wp.cpt('project').slug(element).embed()
       projects.push(project)
     }
-
+  console.log(projects)
     return {
       projects,
     }
   },
+  // async fetch(){
+
+  // } ,
 
   data() {
     return {

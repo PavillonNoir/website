@@ -22,7 +22,7 @@ export default {
   },
   head() {
     return {
-      title: 'Error 404 Not Found',
+      title: `Error ${this.error.statusCode} Not Found`,
     }
   },
 }

@@ -37,10 +37,10 @@ export default {
     const catchPhrase = await data[0].acf.catchphrase
     const latestNews = await data[0].acf.latest_news
     const showreel = await data[0].acf.showreel
-    const latestNewsId = latestNews.map((item) => item.project.ID)
+    const latestNewsId = latestNews.map((item) => item.project.post_name)
     const projects = []
     for (const element of latestNewsId) {
-      const project = await app.$wp.cpt('project').id(element).embed()
+      const project = await app.$wp.cpt('project').slug(element).embed()
       projects.push(project)
     }
 
