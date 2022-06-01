@@ -26,7 +26,7 @@ export default {
       const project = await app.$wp.cpt('project').slug(element).embed()
       projects.push(project)
     }
-    console.log(projects)
+
     return {
       projects,
     }
