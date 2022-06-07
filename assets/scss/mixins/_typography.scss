@@ -6,7 +6,7 @@
   font-size: 6.69rem;
   line-height: 6.69rem;
   letter-spacing: -0.8px;
-  font-weight:600;
+  font-weight: 600;
 
   @include responsive('widescreen') {
     font-size: calc(6.69rem * 0.75);
@@ -28,7 +28,7 @@
   font-size: 5rem;
   line-height: 5rem;
   letter-spacing: -0.8px;
-  font-weight:600;
+  font-weight: 600;
 
   @include responsive('widescreen') {
     font-size: calc(5rem * 0.75);
@@ -49,7 +49,7 @@
   line-height: 2.625rem;
   letter-spacing: 0;
   font-family: $NoeDisplay;
-  font-weight:600;
+  font-weight: 600;
   @include responsive('widescreen') {
     font-size: calc(2.25rem * 0.75);
     line-height: calc(2.625rem * 0.75);
