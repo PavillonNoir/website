@@ -162,12 +162,13 @@ export default {
   grid-column-gap: 1.5rem;
   overflow-x: hidden;
   .left-side {
+    display: flex;
+    flex-direction: column;
+    row-gap: 150px;
+
     .project-title {
-      margin-bottom: 16.75rem;
       padding-left: 5.625rem;
-      @include responsive('phone') {
-        padding: 68px 24px;
-      }
+      margin-bottom: 7.375rem;
       .title {
         @include h2;
       }
@@ -196,31 +197,35 @@ export default {
     }
   }
   .right-side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    display: grid;
+    justify-items: flex-end;
+    grid-gap: 150px;
   }
-
   @include responsive('widescreen') {
     .left-side {
+      row-gap: calc(150px * 0.75);
       .project-title {
-        margin-bottom: cac(16.75rem * 0.75);
         padding-left: calc(5.625rem * 0.75);
+        margin-bottom: calc(7.375rem * 0.75);
       }
+    }
+    .right-side {
+      grid-gap: calc(150px * 0.75);
     }
   }
   @include responsive('desktop') {
     .left-side {
+      row-gap: calc(150px * 0.64);
       .project-title {
-        margin-bottom: cac(16.75rem * 0.64);
         padding-left: calc(5.625rem * 0.64);
+        margin-bottom: calc(7.375rem * 0.8);
       }
     }
   }
   @include responsive('tablet') {
+    row-gap: calc(150px * 0.51);
     .left-side {
       .project-title {
-        margin-bottom: cac(16.75rem * 0.51);
         padding-left: calc(5.625rem * 0.51);
       }
     }
@@ -229,7 +234,6 @@ export default {
     grid-template-columns: 1fr;
     .left-side {
       .project-title {
-        margin-bottom: 4.25rem;
         padding-left: 1.5625rem;
       }
     }

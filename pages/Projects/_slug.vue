@@ -1,5 +1,5 @@
 <template>
-  <div class="single-project">
+  <div v-show="projectDetail" class="single-project">
     <LazyHydrate when-idle>
       <div
         class="single-project__cover"
@@ -226,7 +226,7 @@ export default {
     margin: 0;
     .sub-title {
       @include h3;
-      font-weight: 500;
+      font-weight: 600;
     }
     .summary {
       @include caption;

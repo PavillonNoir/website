@@ -616,7 +616,7 @@ export default {
       }
       P {
         @include caption;
-        font-weight: 700;
+        font-weight: 600;
       }
     }
   }

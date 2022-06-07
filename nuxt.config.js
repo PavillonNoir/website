@@ -75,7 +75,9 @@ export default {
     [
       'wp-nuxt',
       {
-        endpoint: process.env.NUXT_ENV_API_URL || 'https://preprod.pavillonnoir.com/wp-json',
+        endpoint:
+          process.env.NUXT_ENV_API_URL ||
+          'https://preprod.pavillonnoir.com/wp-json',
         extensions: true,
         username: process.env.NUXT_ENV_USERNAME,
         password: process.env.NUXT_ENV_PASSWORD,

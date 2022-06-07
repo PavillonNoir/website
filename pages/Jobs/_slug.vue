@@ -48,14 +48,14 @@ export default {
     &-infos {
       padding: 0;
       @include job-content;
-      font-weight: 500;
+      font-weight: 600;
       color: $primary;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
     &-details {
       @include caption;
-      font-weight: 500;
+      font-weight: 600;
       color: $primary;
       margin-bottom: 7.5rem;
       letter-spacing: 1px;

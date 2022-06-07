@@ -5,8 +5,8 @@
   font-family: $NoeDisplay;
   font-size: 6.69rem;
   line-height: 6.69rem;
-  letter-spacing: -10;
-  font-weight: 500;
+  letter-spacing: -0.8px;
+  font-weight:600;
 
   @include responsive('widescreen') {
     font-size: calc(6.69rem * 0.75);
@@ -17,8 +17,8 @@
     line-height: calc(6.69rem * 0.64);
   }
   @include responsive('phone') {
-    font-size: 4rem;
-    line-height: 4.33rem;
+    font-size: 2.25rem;
+    line-height: 2.625rem;
     letter-spacing: 0;
   }
 }
@@ -27,8 +27,8 @@
   font-family: $NoeDisplay;
   font-size: 5rem;
   line-height: 5rem;
-  letter-spacing: -10;
-  font-weight: 500;
+  letter-spacing: -0.8px;
+  font-weight:600;
 
   @include responsive('widescreen') {
     font-size: calc(5rem * 0.75);
@@ -49,7 +49,7 @@
   line-height: 2.625rem;
   letter-spacing: 0;
   font-family: $NoeDisplay;
-  font-weight: 500;
+  font-weight:600;
   @include responsive('widescreen') {
     font-size: calc(2.25rem * 0.75);
     line-height: calc(2.625rem * 0.75);
@@ -67,7 +67,7 @@
   font-family: $IBMPlexMono;
   font-size: 1.125rem;
   line-height: 1.5rem;
-  letter-spacing: 10;
+  letter-spacing: 0.8px;
   font-weight: normal;
   @include responsive('widescreen') {
     font-size: calc(1.125rem * 0.75);
@@ -86,7 +86,7 @@
   font-family: $IBMPlexMono;
   font-size: 0.875rem;
   line-height: 1.3125rem;
-  letter-spacing: 25;
+  letter-spacing: 2px;
   font-weight: normal;
   @include responsive('widescreen') {
     font-size: calc(0.875rem * 0.75);
@@ -124,7 +124,7 @@
   font-family: $IBMPlexMono;
   font-size: 0.875rem;
   line-height: 1.125rem;
-  letter-spacing: 25;
+  letter-spacing: 2px;
   font-weight: normal;
   @include responsive('widescreen') {
     font-size: calc(0.875rem * 0.75);
@@ -143,7 +143,7 @@
   font-family: $IBMPlexMono;
   font-size: 1.125rem;
   line-height: 1.5rem;
-  letter-spacing: 10;
+  letter-spacing: 0.8px;
   font-weight: normal;
   @include responsive('widescreen') {
     font-size: calc(1.125rem * 0.75);
@@ -163,7 +163,7 @@
   font-family: $IBMPlexMono;
   font-size: 1.125rem;
   line-height: 1.5rem;
-  letter-spacing: 10;
+  letter-spacing: 0.8px;
   font-weight: 400;
   text-transform: capitalize;
   text-decoration: none;
@@ -189,7 +189,7 @@
   font-family: $IBMPlexMono;
   font-size: 1rem;
   line-height: 1.33rem;
-  letter-spacing: 25;
+  letter-spacing: 2px;
   font-weight: normal;
   @include responsive('widescreen') {
     font-size: calc(1rem * 0.75);

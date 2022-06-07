@@ -32,7 +32,7 @@ export default {
   padding: 9.375rem 5.625rem;
   &-title {
     @include body;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
     margin-bottom: 7.5rem;
   }
