@@ -584,7 +584,7 @@ export default {
         path {
           fill: $white;
         }
-        .skill-text{
+        .skill-text {
           text-decoration: underline;
         }
       }
