@@ -89,16 +89,7 @@ export default {
   bootstrapVue: {
     icons: false,
   },
-  lazySizes: {
-    plugins: {
-      blurUp: true,
-    },
-    blurUpClass: 'ls-blur-up-img',
-    blurUpLoadingClass: 'ls-blur-up-is-loading',
-    blurUpInviewClass: 'ls-inview',
-    blurUpLoadedClass: 'ls-blur-up-loaded',
-    blurUpLoadedOriginalClass: 'ls-original-loaded',
-  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308

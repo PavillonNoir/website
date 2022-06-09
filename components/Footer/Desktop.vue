@@ -7,7 +7,7 @@
           <form class="newsletter" @submit.prevent="handleSubmit">
             <input
               v-model="email"
-              type="email"
+              type="text"
               name="email"
               placeholder="Your email Address"
             />
@@ -47,18 +47,61 @@
           </form>
         </div>
         <span v-show="error" class="error">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="8.707"
+            height="8.707"
+            viewBox="0 0 8.707 8.707"
+          >
+            <line
+              id="Ligne_5"
+              data-name="Ligne 5"
+              x1="8"
+              y2="8"
+              transform="translate(0.354 0.354)"
+              fill="none"
+              stroke="#707070"
+              stroke-width="1"
+            />
+            <line
+              id="Ligne_6"
+              data-name="Ligne 6"
+              x2="8"
+              y2="8"
+              transform="translate(0.354 0.354)"
+              fill="none"
+              stroke="#707070"
+              stroke-width="1"
+            />
+          </svg>
           {{ error }}
         </span>
         <span v-show="success" class="success">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12.962"
+            height="8.896"
+            viewBox="0 0 12.962 8.896"
+          >
+            <path
+              id="Tracé_141"
+              data-name="Tracé 141"
+              d="M946.274,155l4.419,4.419,7.836-7.836"
+              transform="translate(-945.921 -151.23)"
+              fill="none"
+              stroke="#707070"
+              stroke-width="1"
+            />
+          </svg>
           {{ success }}
         </span>
       </div>
       <div class="footer-item footer-info col-md-12 col-lg-6">
-        <div class="footer-item__adress">
+        <div class="footer-item__adress footer-info__item">
           <h3 class="footer-title">Address</h3>
           <address class="footer-text">{{ address }}</address>
         </div>
-        <div class="footer-item__connect">
+        <div class="footer-item__connect footer-info__item">
           <h3 class="footer-title">connect</h3>
           <div class="jobs-connect__link">
             <a
@@ -69,13 +112,13 @@
             >
           </div>
         </div>
-        <div class="footer-item__phone">
+        <div class="footer-item__phone footer-info__item">
           <h3 class="footer-title">Phone</h3>
           <p class="footer-text">
             <a :href="`tel:${phoneNumber.trim()}`"></a> {{ phoneNumber }}
           </p>
         </div>
-        <div class="footer-item__social">
+        <div class="footer-item__social footer-info__item">
           <h3 class="footer-title">Follow us</h3>
           <p class="footer-text">
             <span v-for="(social, index) in socialLinks" :key="index">
@@ -92,7 +135,7 @@
           <form class="newsletter" @submit.prevent="handleSubmit">
             <input
               v-model="email"
-              type="email"
+              type="text"
               name="email"
               placeholder="Your email Address"
             />
@@ -132,9 +175,52 @@
           </form>
         </div>
         <span v-show="error" class="error">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="8.707"
+            height="8.707"
+            viewBox="0 0 8.707 8.707"
+          >
+            <line
+              id="Ligne_5"
+              data-name="Ligne 5"
+              x1="8"
+              y2="8"
+              transform="translate(0.354 0.354)"
+              fill="none"
+              stroke="#707070"
+              stroke-width="1"
+            />
+            <line
+              id="Ligne_6"
+              data-name="Ligne 6"
+              x2="8"
+              y2="8"
+              transform="translate(0.354 0.354)"
+              fill="none"
+              stroke="#707070"
+              stroke-width="1"
+            />
+          </svg>
           {{ error }}
         </span>
         <span v-show="success" class="success">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12.962"
+            height="8.896"
+            viewBox="0 0 12.962 8.896"
+          >
+            <path
+              id="Tracé_141"
+              data-name="Tracé 141"
+              d="M946.274,155l4.419,4.419,7.836-7.836"
+              transform="translate(-945.921 -151.23)"
+              fill="none"
+              stroke="#707070"
+              stroke-width="1"
+            />
+          </svg>
           {{ success }}
         </span>
       </div>
@@ -160,10 +246,12 @@ export default {
       email: '',
       error: '',
       success: '',
+      subscribers: [],
     }
   },
   async fetch() {
     const data = await this.$wp.cpt('website-info').slug('footer')
+    this.subscribers = await this.$wp.cpt('subscriber')
     this.connectLinks = await data[0].acf.connect
     this.address = await data[0].acf.address
     this.phoneNumber = await data[0].acf.phone
@@ -175,27 +263,37 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault()
+      const subscribers = this.subscribers.map(
+        (subscriber) => subscriber.title.rendered
+      )
       // eslint-disable-next-line no-useless-escape
       if (this.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-        this.$wp
-          .cpt('subscriber')
-          .create({
-            title: this.email,
-            status: 'publish',
-          })
-          .then((response) => {
-            this.email = ''
-            this.error = ''
-            this.success = 'Thank you for subscribing!'
-            setTimeout(() => {
-              this.success = ''
-            }, 2000)
-          })
-          .catch((err) => {
-            this.error = err.message
-          })
+        if (subscribers.includes(this.email)) {
+          this.error = 'You are already subscribed'
+        } else {
+          this.$wp
+            .cpt('subscriber')
+            .create({
+              title: this.email,
+              status: 'publish',
+            })
+            .then((response) => {
+              this.email = ''
+              this.error = ''
+              this.success = 'Subscription successful'
+              setTimeout(() => {
+                this.success = ''
+              }, 4000)
+            })
+            .catch((err) => {
+              this.error = err.message
+              setTimeout(() => {
+                this.error = ''
+              }, 4000)
+            })
+        }
       } else {
-        this.error = 'Please enter a valid email'
+        this.error = 'Insert a valid email address'
       }
     },
   },
@@ -232,26 +330,27 @@ export default {
     }
   }
   &-info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 8.125rem;
-    grid-row-gap: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2.5rem;
+
     @include responsive('widescreen') {
-      grid-column-gap: calc(8.125rem * 0.75);
-      grid-row-gap: calc(2.5rem * 0.75);
+      row-gap: calc(2.5rem * 0.75);
     }
     @include responsive('desktop') {
-      grid-column-gap: calc(8.125rem * 0.64);
-      grid-row-gap: calc(2.5rem * 0.64);
+      row-gap: calc(2.5rem * 0.64);
     }
     @include responsive('tablet') {
-      grid-column-gap: calc(8.125rem * 0.51);
-      grid-row-gap: calc(2.5rem * 0.51);
+      row-gap: calc(2.5rem * 0.51);
     }
     @include responsive('phone') {
-      grid-template-columns: 1fr;
-      grid-column-gap: 28px;
-      grid-row-gap: 28px;
+      padding: 0;
+    }
+    &__item {
+      width: 50%;
+      @include responsive('phone') {
+        width: 100%;
+      }
     }
   }
 
@@ -277,7 +376,7 @@ export default {
     justify-content: start;
     align-items: center;
     margin-top: 0.625rem;
-    margin-bottom: 3.75rem;
+
     a {
       @include footer;
       margin-right: 1.875rem;
@@ -338,6 +437,10 @@ export default {
       @include footer;
       color: $tertiary;
       margin-bottom: 0;
+      text-align: right;
+      @include responsive('phone') {
+        text-align: left;
+      }
     }
   }
   @include responsive('widescreen') {
@@ -349,12 +452,6 @@ export default {
       flex-wrap: wrap;
       row-gap: calc(1.875rem * 0.75);
     }
-    &-info {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: calc(8.125rem * 0.75);
-      grid-row-gap: calc(2.5rem * 0.75);
-    }
   }
   @include responsive('desktop') {
     &-container {
@@ -364,12 +461,6 @@ export default {
       justify-content: space-between;
       flex-wrap: wrap;
       row-gap: calc(1.875rem * 0.64);
-    }
-    &-info {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: calc(8.125rem * 0.64);
-      grid-row-gap: calc(2.5rem * 0.64);
     }
   }
   @include responsive('tablet') {
@@ -381,12 +472,6 @@ export default {
       flex-wrap: wrap;
       row-gap: calc(1.875rem * 0.51);
     }
-    &-info {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: calc(8.125rem * 0.51);
-      grid-row-gap: calc(2.5rem * 0.51);
-    }
   }
   @include responsive('phone') {
     &-container {
@@ -397,13 +482,7 @@ export default {
       flex-wrap: wrap;
       row-gap: calc(1.875rem * 0.35);
     }
-    &-info {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-column-gap: 28px;
-      grid-row-gap: 28px;
-      padding: 0;
-    }
+
     &-newsletter {
       width: 100%;
       display: none;
@@ -423,11 +502,11 @@ export default {
     }
   }
   .error {
-    color: red;
+    color: $grey;
     @include body;
   }
   .success {
-    color: green;
+    color: $grey;
     @include body;
   }
 }

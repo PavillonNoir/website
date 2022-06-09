@@ -38,7 +38,7 @@ export default {
   justify-content: center;
   align-items: center;
   h2 {
-    @include h1;
+    @include h2;
     text-align: center !important;
     font-weight: 600 !important;
     margin-bottom: 0.4375rem;

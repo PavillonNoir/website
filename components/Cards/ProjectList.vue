@@ -2,8 +2,9 @@
   <div class="project-contaoner">
     <div class="cardlist">
       <div class="left-side">
-        <div class="project-title">
-          <h2 class="title">{{ title }}</h2>
+        <div :class="showfilter ? ' project-title' : ' project-title'">
+          <h2 class="title desktop">Featured Projects</h2>
+          <h2 class="title mobile">Featured <br />Projects</h2>
           <div @mouseleave="hideFilter">
             <nuxtLink v-b-hover="showFilter" :to="description.link" class="link"
               >{{ description.title }}
@@ -168,9 +169,20 @@ export default {
 
     .project-title {
       padding-left: 5.625rem;
-      margin-bottom: 7.375rem;
+      margin-bottom: 7rem;
+
       .title {
         @include h2;
+        &.desktop {
+          @include responsive('phone') {
+            display: none !important;
+          }
+        }
+        &.mobile {
+          @media (min-width: 768px) {
+            display: none;
+          }
+        }
       }
       .link {
         @include link;
@@ -200,13 +212,13 @@ export default {
     display: grid;
     justify-items: flex-end;
     grid-gap: 150px;
+    overflow: hidden !important;
   }
   @include responsive('widescreen') {
     .left-side {
       row-gap: calc(150px * 0.75);
       .project-title {
         padding-left: calc(5.625rem * 0.75);
-        margin-bottom: calc(7.375rem * 0.75);
       }
     }
     .right-side {
@@ -218,7 +230,6 @@ export default {
       row-gap: calc(150px * 0.64);
       .project-title {
         padding-left: calc(5.625rem * 0.64);
-        margin-bottom: calc(7.375rem * 0.8);
       }
     }
   }
@@ -232,10 +243,16 @@ export default {
   }
   @include responsive('phone') {
     grid-template-columns: 1fr;
+    grid-gap: 40px;
     .left-side {
+      row-gap: 40px;
+      margin-top: 5.625rem;
       .project-title {
         padding-left: 1.5625rem;
       }
+    }
+    .right-side {
+      grid-gap: 40px;
     }
   }
 }

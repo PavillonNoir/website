@@ -20,7 +20,7 @@
         <b-col
           md="12"
           lg="8"
-          class="activities-content d-flex justify-content-lg-around align-items-lg-end align-items-md-center"
+          class="activities-content d-flex justify-content-lg-around align-items-lg-center align-items-md-center"
         >
           <div
             v-for="(activity, index) in block360.images"
@@ -584,6 +584,9 @@ export default {
         path {
           fill: $white;
         }
+        .skill-text{
+          text-decoration: underline;
+        }
       }
       .skill-svg-item {
         display: none;
@@ -602,6 +605,9 @@ export default {
         top: -7.7rem;
         .skill-text {
           cursor: pointer;
+          &:active {
+            text-decoration: underline;
+          }
         }
       }
       @include responsive('desktop') {

@@ -9,7 +9,7 @@
             ''
           "
           blank="true"
-          blank-color="#bbb"
+          blank-src="/loading/loading.gif"
           fluid
           class="project-cover"
           alt="Featured Image"

@@ -121,6 +121,7 @@ export default {
     display: grid;
     justify-items: flex-end;
     grid-gap: 150px;
+    overflow: hidden !important;
   }
   @include responsive('widescreen') {
     .left-side {
@@ -156,6 +157,7 @@ export default {
     grid-gap: 40px;
     .left-side {
       row-gap: 40px;
+      margin-top: 5.625rem;
       .project-title {
         padding-left: 1.5625rem;
         margin-bottom: 0;
