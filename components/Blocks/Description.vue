@@ -48,7 +48,7 @@ export default {
   }
   p {
     @include caption;
-    font-weight: 600;
+    font-weight: normal;
   }
 }
 </style>

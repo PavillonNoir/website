@@ -7,8 +7,10 @@
         :key="index"
         class="members-content__item col-md-12 col-lg-3"
       >
-        <h3 class="firstname">{{ member.acf.firstname }}</h3>
-        <h3 class="lastname">{{ member.acf.lastname }}</h3>
+        <h3 class="names">
+          {{ member.acf.firstname }} <br />{{ member.acf.lastname }}
+        </h3>
+
         <!-- eslint-disable vue/no-v-html -->
         <div class="position" v-html="member.acf.position"></div>
         <a class="link" :href="`mailto:${member.acf.email}`">Contacter</a>
@@ -32,7 +34,7 @@ export default {
   padding: 9.375rem 5.625rem;
   &-title {
     @include body;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
     margin-bottom: 7.5rem;
   }
@@ -47,19 +49,19 @@ export default {
       justify-content: center;
       align-items: center;
       margin-bottom: 3.9375rem;
-      .firstname,
-      .lastname {
+      .names {
         @include h3;
         font-weight: 600;
-        margin-bottom: 4px;
         text-align: center;
+        margin-bottom: 0.625rem;
       }
       .position {
         @include link;
-        margin-bottom: 4px;
         text-align: center;
         text-decoration: none;
         font-weight: 400;
+        margin-bottom: 0.625rem;
+
         &:hover {
           text-decoration: none;
         }
@@ -68,7 +70,6 @@ export default {
         @include footer-caption;
         color: $primary;
         font-weight: 400;
-        margin-top: 10px;
         color: $tertiary;
         text-transform: uppercase;
         &:hover {

@@ -2,8 +2,9 @@
   <div class="project-contaoner">
     <div class="cardlist">
       <div class="left-side">
-        <div class="project-title">
-          <h2 class="title">{{ title }}</h2>
+        <div :class="showfilter ? ' project-title' : ' project-title'">
+          <h2 class="title desktop">Featured Projects</h2>
+          <h2 class="title mobile">Featured <br />Projects</h2>
           <div @mouseleave="hideFilter">
             <nuxtLink v-b-hover="showFilter" :to="description.link" class="link"
               >{{ description.title }}
@@ -162,14 +163,26 @@ export default {
   grid-column-gap: 1.5rem;
   overflow-x: hidden;
   .left-side {
+    display: flex;
+    flex-direction: column;
+    row-gap: 150px;
+
     .project-title {
-      margin-bottom: 16.75rem;
       padding-left: 5.625rem;
-      @include responsive('phone') {
-        padding: 68px 24px;
-      }
+      margin-bottom: 7rem;
+
       .title {
         @include h2;
+        &.desktop {
+          @include responsive('phone') {
+            display: none !important;
+          }
+        }
+        &.mobile {
+          @media (min-width: 768px) {
+            display: none;
+          }
+        }
       }
       .link {
         @include link;
@@ -196,42 +209,50 @@ export default {
     }
   }
   .right-side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    display: grid;
+    justify-items: flex-end;
+    grid-gap: 150px;
+    overflow: hidden !important;
   }
-
   @include responsive('widescreen') {
     .left-side {
+      row-gap: calc(150px * 0.75);
       .project-title {
-        margin-bottom: cac(16.75rem * 0.75);
         padding-left: calc(5.625rem * 0.75);
       }
+    }
+    .right-side {
+      grid-gap: calc(150px * 0.75);
     }
   }
   @include responsive('desktop') {
     .left-side {
+      row-gap: calc(150px * 0.64);
       .project-title {
-        margin-bottom: cac(16.75rem * 0.64);
         padding-left: calc(5.625rem * 0.64);
       }
     }
   }
   @include responsive('tablet') {
+    row-gap: calc(150px * 0.51);
     .left-side {
       .project-title {
-        margin-bottom: cac(16.75rem * 0.51);
         padding-left: calc(5.625rem * 0.51);
       }
     }
   }
   @include responsive('phone') {
     grid-template-columns: 1fr;
+    grid-gap: 40px;
     .left-side {
+      row-gap: 40px;
+      margin-top: 5.625rem;
       .project-title {
-        margin-bottom: 4.25rem;
         padding-left: 1.5625rem;
       }
+    }
+    .right-side {
+      grid-gap: 40px;
     }
   }
 }

@@ -9,7 +9,7 @@
             ''
           "
           blank="true"
-          blank-color="#bbb"
+          blank-src="/loading/loading.gif"
           fluid
           class="project-cover"
           alt="Featured Image"
@@ -20,7 +20,7 @@
               ? 'project-client transform-right'
               : 'project-client transform-left'
           "
-          :style="showfilter && 'transform: translateX(0)'"
+          :style="showfilter && 'transform: scale(1)'"
         >
           <b-img-lazy
             :src="project[0].acf.logo_client.sizes.medium"
@@ -37,7 +37,7 @@
             : 'project-details left'
         "
       >
-        <h2 class="project-text">
+        <div class="project-text">
           <span class="project-text__client">{{
             project[0]._embedded['wp:term'][0][0].name
           }}</span
@@ -49,7 +49,7 @@
             @mouseleave="hideFilter"
             >{{ project[0].title.rendered }}</span
           >
-        </h2>
+        </div>
       </div>
     </div>
   </NuxtLink>
@@ -85,7 +85,7 @@ export default {
 <style lang="scss" scoped>
 .project {
   position: relative;
-  margin-bottom: 9.375rem;
+
   width: 50rem;
   &-cover {
     object-fit: cover;
@@ -100,14 +100,17 @@ export default {
       text-align: right;
     }
     .project-text {
+      h2 {
+        font-size: 0rem;
+      }
       &__client {
         @include caption;
-        font-weight: 300;
+        font-weight: 400;
         text-transform: uppercase;
       }
       &__title {
         @include h3;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
         font-family: $NoeDisplay;
       }
     }
@@ -134,9 +137,15 @@ export default {
       }
       &.transform-left {
         transform: translateX(100%);
+        @include responsive('phone') {
+          transform: scale(0);
+        }
       }
       &.transform-right {
         transform: translateX(-100%);
+        @include responsive('phone') {
+          transform: scale(0);
+        }
       }
       &.show {
         transform: translateX(0);
@@ -144,19 +153,15 @@ export default {
     }
   }
   @include responsive('widescreen') {
-    margin-bottom: calc(9.375rem * 0.75);
     width: calc(50rem * 0.75);
   }
   @include responsive('desktop') {
-    margin-bottom: calc(9.375rem * 0.64);
     width: calc(50rem * 0.64);
   }
   @include responsive('tablet') {
-    margin-bottom: calc(9.375rem * 0.51);
     width: calc(50rem * 0.51);
   }
   @include responsive('phone') {
-    margin-bottom: calc(9.375rem * 0.4);
     width: 100%;
     &-details {
       padding-left: 1.5rem;

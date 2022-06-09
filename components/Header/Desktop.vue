@@ -2,7 +2,13 @@
   <header>
     <div class="header">
       <div class="logo" @click="toggleMenu">
-        <img src="/images/logo.png" alt="Logo" width="41.084" height="48.001" />
+        <img
+          class="logo-img"
+          src="/images/logo.png"
+          alt="Logo"
+          width="41.084"
+          height="48.001"
+        />
       </div>
       <ul role="nav" class="navbar">
         <li><NuxtLink to="/projects" class="menu-item">Projects</NuxtLink></li>
@@ -10,11 +16,12 @@
       </ul>
     </div>
     <div :class="isOpen ? 'hamburger d-flex show' : 'hamburger d-flex'">
-      <div class="hamburger-container col-md-12 col-lg-4">
+      <div class="hamburger-container">
         <div class="logo" @click="toggleMenu">
           <img
             src="/images/logo.png"
-            alt="Logo"
+            class="logo-img"
+            alt="Website Logo"
             width="41.084"
             height="48.001"
           />
@@ -44,19 +51,6 @@
               >
             </div>
           </div>
-          <div class="hamburger-infos__address">
-            <h2 class="hamburger-title">Address</h2>
-
-            <address class="hamburger-text">
-              {{ address }}
-            </address>
-          </div>
-          <div class="hamburger-infos__phone">
-            <h2 class="hamburger-title">Phone</h2>
-            <p class="hamburger-text">
-              <a href="`tel:${}`" class="text-light">{{ phoneNumber }} </a>
-            </p>
-          </div>
           <div class="hamburger-infos__social">
             <h3 class="hamburger-title">Follow us</h3>
             <p class="hamburger-text">
@@ -70,8 +64,24 @@
               </span>
             </p>
           </div>
+          <div class="hamburger-infos__address">
+            <h2 class="hamburger-title">Address</h2>
+
+            <address class="hamburger-text">
+              {{ address }}
+            </address>
+          </div>
+          <div class="hamburger-infos__phone">
+            <h2 class="hamburger-title">Phone</h2>
+            <p class="hamburger-text">
+              <a :href="`tel:${phoneNumber}`" class="text-light"
+                >{{ phoneNumber }}
+              </a>
+            </p>
+          </div>
         </div>
       </div>
+      <div v-if="isOpen" class="grey-container" @click="toggleMenu"></div>
     </div>
   </header>
 </template>
@@ -121,19 +131,25 @@ header {
   padding: 1.875rem 6.225rem 0 5.625rem;
   mix-blend-mode: difference !important;
   z-index: 999;
-  svg {
-    &:hover {
-      transform: rotate(180deg);
-    }
+  @include responsive('widescreen') {
+    padding: calc(1.875rem * 0.75) calc(6.225rem * 0.75) 0 calc(5.625rem * 0.75);
+  }
+  @include responsive('desktop') {
+    padding: calc(1.875rem * 0.64) calc(6.225rem * 0.64) 0 calc(5.625rem * 0.64);
+  }
+  @include responsive('tablet') {
+    padding: calc(1.875rem * 0.51) calc(6.225rem * 0.51) 0 calc(5.625rem * 0.51);
   }
 
   .navbar {
+    padding: 0.5rem 0;
     .menu-item {
       @include nav;
       color: $white;
-      margin: 0 30px 0 0;
+      margin: 0 0 0 30px;
       font-weight: 400;
       letter-spacing: 2.5px;
+
       &:hover {
         color: $white;
         text-decoration: underline;
@@ -144,13 +160,22 @@ header {
     }
   }
 }
+.logo {
+  &-img {
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: rotate(180deg);
+    }
+  }
+}
 .hamburger {
   position: fixed;
   z-index: 10000;
   inset: 0;
-  background: rgba(112, 112, 112, 0.8);
   transform: translateX(-100%);
   transition: all 0.2s ease-in-out;
+  display: flex;
+
   @media (max-width: 768px) {
     transform: translateY(-200%);
     &-container {
@@ -162,10 +187,28 @@ header {
   }
   &-container {
     background: $primary;
+    width: 501px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @include responsive('widescreen') {
+      width: calc(501px * 0.75);
+    }
+    @include responsive('desktop') {
+      width: calc(501px * 0.64);
+    }
+    @include responsive('tablet') {
+      width: calc(501px * 0.51);
+    }
     padding: 30px 90px 90px;
     @media (max-width: 768px) {
       padding: 30px 30px 30px;
     }
+  }
+  .grey-container {
+    flex: 1;
+    animation: fadeIn 0.5s ease-in;
+    background-color: rgba(112, 112, 112, 0.5);
   }
   &-menu {
     margin-top: 100px;
@@ -190,8 +233,17 @@ header {
     transition: transform 0.2s ease-in-out;
   }
   &-infos {
-    margin-top: 100px;
-    margin-bottom: 90px;
+    margin: 11.875rem 3rem 5.625rem 0;
+    @include responsive('widescreen') {
+      margin: calc(11.875rem * 0.75) calc(3rem * 0.75) calc(5.625rem * 0.75) 0;
+    }
+    @include responsive('desktop') {
+      margin: calc(11.875rem * 0.64) calc(3rem * 0.64) calc(5.625rem * 0.64) 0;
+    }
+    @include responsive('tablet') {
+      margin: calc(11.875rem * 0.51) calc(3rem * 0.51) calc(5.625rem * 0.51) 0;
+    }
+
     .hamburger-title {
       @include footer-caption;
       color: $tertiary;
@@ -202,8 +254,11 @@ header {
     .hamburger-text {
       @include footer;
       color: $white;
-      font-weight: 600;
+      font-weight: 400;
       margin-bottom: 30px;
+      &:hover {
+        text-decoration: underline;
+      }
       span {
         margin-right: 20px;
         a {
@@ -215,13 +270,16 @@ header {
       display: flex;
       justify-content: start;
       align-items: center;
-      margin-top: 10px;
-      margin-bottom: 30px;
+      margin-top: 0.625rem;
+      margin-bottom: 1.875rem;
       a {
         @include footer;
-        margin-right: 30px;
+        margin-right: 1.25rem;
         color: $white;
-        font-weight: 600;
+        font-weight: 400;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -274,6 +332,14 @@ header {
         margin-bottom: 10px;
       }
     }
+  }
+}
+@keyframes fadeIn {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: rgba(112, 112, 112, 0.5);
   }
 }
 </style>

@@ -46,7 +46,7 @@ export default {
   padding: 20.625rem 5.625rem 25.625rem;
   &-title > h2 {
     @include h2;
-    margin-bottom: 0.9375rem;
+    margin-bottom: 1.25rem;
     @include responsive('phone') {
       display: none;
     }

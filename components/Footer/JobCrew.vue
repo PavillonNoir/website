@@ -14,7 +14,7 @@
         v-for="(job, index) in jobs"
         :key="index"
         :to="`/jobs/${job.slug}`"
-        >{{ job.title.rendered }}
+        >{{ sanitizeHtml(job.title.rendered) }}
       </nuxtLink>
     </div>
   </div>
@@ -39,6 +39,17 @@ export default {
   },
   mounted() {
     this.$fetch()
+  },
+  methods: {
+    sanitizeHtml(unsafe) {
+      return unsafe
+        .replace(/<br\s*\/?>/g, '\n')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;')
+    },
   },
 }
 </script>

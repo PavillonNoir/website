@@ -9,7 +9,14 @@
         />
       </div>
     </div>
-    <FooterBlockCta />
+    <div class="blockcta">
+      <div class="blockcta-items">
+        <a href="#" class="blockcta-items__link">Back to Top</a>
+      </div>
+
+      <div class="col-6 line"></div>
+      <div class="col-6"></div>
+    </div>
   </div>
 </template>
 
@@ -51,6 +58,21 @@ export default {
   padding: 240px 0;
   @media (max-width: 767px) {
     padding: 68px 0;
+  }
+}
+.blockcta {
+  &-items {
+    display: flex;
+    justify-content: center;
+    &__link {
+      @include link;
+      text-decoration: underline;
+      margin-bottom: 1.875rem;
+    }
+  }
+  .line {
+    height: 7.5rem;
+    border-right: 1px solid $grey;
   }
 }
 </style>

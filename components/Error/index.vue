@@ -33,7 +33,7 @@ export default {
   background-color: $white;
   color: $primary;
   .title {
-    @include h1;
+    @include h2;
     margin-bottom: 30px;
   }
   .subtitle {

@@ -47,17 +47,6 @@ export default {
     return {
       projectLeftSide: [],
       projectRightSide: [],
-      showfilter: false,
-      categoryFiltered: 'All',
-      categories: [
-        'All',
-        '360°',
-        'Events & XP',
-        'Image & Branding',
-        'Film & Content',
-        'Creative Technology',
-        'Social & Influence',
-      ],
     }
   },
   computed: {
@@ -102,9 +91,15 @@ export default {
   grid-column-gap: 1.5rem;
   overflow-x: hidden;
   .left-side {
+    display: flex;
+    flex-direction: column;
+    row-gap: 150px;
+
     .project-title {
-      margin-bottom: 16.75rem;
       padding-left: 5.625rem;
+      margin-bottom: 7.375rem;
+      @include responsive('phone') {
+      }
       .title {
         @include h2;
         color: $primary;
@@ -114,64 +109,62 @@ export default {
         @include link;
         text-decoration: underline;
         transition: all 0.3s ease;
-        font-weight: 500;
+        font-weight: 600;
         &:hover {
           text-decoration: underline !important;
           font-weight: 700;
         }
       }
-      .project-filter {
-        opacity: 0;
-        height: 0;
-        padding: 0;
-
-        &.show {
-          opacity: 1;
-          transition: all 0.5s ease;
-        }
-        li {
-          @include link;
-          cursor: pointer;
-        }
-      }
     }
   }
   .right-side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    display: grid;
+    justify-items: flex-end;
+    grid-gap: 150px;
+    overflow: hidden !important;
   }
   @include responsive('widescreen') {
     .left-side {
+      row-gap: calc(150px * 0.75);
       .project-title {
-        margin-bottom: cac(16.75rem * 0.75);
         padding-left: calc(5.625rem * 0.75);
+        margin-bottom: calc(7.375rem * 0.75);
       }
+    }
+    .right-side {
+      grid-gap: calc(150px * 0.75);
     }
   }
   @include responsive('desktop') {
     .left-side {
+      row-gap: calc(150px * 0.64);
       .project-title {
-        margin-bottom: cac(16.75rem * 0.64);
         padding-left: calc(5.625rem * 0.64);
+        margin-bottom: calc(7.375rem * 0.8);
       }
     }
   }
   @include responsive('tablet') {
+    row-gap: calc(150px * 0.51);
     .left-side {
       .project-title {
-        margin-bottom: cac(16.75rem * 0.51);
         padding-left: calc(5.625rem * 0.51);
       }
     }
   }
   @include responsive('phone') {
     grid-template-columns: 1fr;
+    grid-gap: 40px;
     .left-side {
+      row-gap: 40px;
+      margin-top: 5.625rem;
       .project-title {
-        margin-bottom: 4.25rem;
         padding-left: 1.5625rem;
+        margin-bottom: 0;
       }
+    }
+    .right-side {
+      grid-gap: 40px;
     }
   }
 }
