@@ -1,17 +1,20 @@
+/* eslint-disable vue/no-v-html */
 <template>
-  <section class="single-job">
-    <b-row class="job-infos">
-      <h2 class="single-job__title" v-html="job[0].title.rendered"></h2>
-      <div class="single-job__content-infos" v-html="jobAcf.description"></div>
-    </b-row>
-    <b-row>
-      <b-col sm="12" md="6" class="single-job__content"> </b-col>
-      <b-col sm="12" md="6" class="single-job__content">
-        <h2 class="single-job__title opacity-none">
-          Consultant.e <br />
-          Social Media
-        </h2>
-
+  <div class="job">
+    <main class="single-job d-flex justify-content-between">
+      <div v-rellax="{ speed: -15 }" class="col-md-12 col-lg-6 job-infos">
+        <p class="sub-title">Jobs</p>
+        <h2 class="single-job__title" v-html="job[0].title.rendered"></h2>
+        <div
+          class="single-job__content-infos"
+          v-html="jobAcf.description"
+        ></div>
+      </div>
+      <div  class="col-md-12 col-lg-6">
+        <h2
+          class="single-job__title transparent"
+          v-html="job[0].title.rendered"
+        ></h2>
         <div
           class="single-job__content-details"
           v-html="jobAcf.requirements"
@@ -19,9 +22,10 @@
         <a href="mailto:jobs@pavillonnoir.com" class="single-job__apply"
           >Apply</a
         >
-      </b-col>
-    </b-row>
-  </section>
+      </div>
+    </main>
+    <FooterJobCrew :jobs="jobs" />
+  </div>
 </template>
 
 <script>
@@ -30,7 +34,9 @@ export default {
   async asyncData({ app, params }) {
     const job = await app.$wp.cpt('job').slug(params.slug).embed()
     const jobAcf = await job[0].acf
-    return { job, jobAcf }
+    let jobs = await app.$wp.cpt('job')
+    jobs = jobs.filter((item) => item.slug !== params.slug)
+    return { job, jobAcf, jobs }
   },
 }
 </script>
@@ -48,14 +54,14 @@ export default {
     &-infos {
       padding: 0;
       @include job-content;
-      font-weight: 600;
+      font-weight: 400;
       color: $primary;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
     &-details {
-      @include caption;
-      font-weight: 600;
+      @include body;
+      font-weight: 400;
       color: $primary;
       margin-bottom: 7.5rem;
       letter-spacing: 1px;
@@ -72,7 +78,6 @@ export default {
     text-decoration: underline;
   }
   .job-infos {
-    position: fixed;
     flex-direction: column;
     z-index: -1;
     @media (max-width: 768px) {
@@ -90,6 +95,14 @@ export default {
   }
   @include responsive('phone') {
     padding: calc(19.375rem * 0.36) calc(7.5rem * 0.36) calc(9.375rem * 0.36);
+  }
+  .transparent {
+    opacity: 0;
+    margin-top: 30px;
+  }
+  .sub-title {
+    @include body;
+    margin-bottom: 30px !important;
   }
 }
 </style>

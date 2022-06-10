@@ -2,7 +2,11 @@
   <div class="project-contaoner">
     <div class="cardlist">
       <div class="left-side">
-        <div :class="showfilter ? ' project-title' : ' project-title'">
+        <div
+          ref="title"
+          v-rellax="{ speed: -10 }"
+          :class="showfilter ? ' project-title' : ' project-title'"
+        >
           <h2 class="title desktop">Featured Projects</h2>
           <h2 class="title mobile">Featured <br />Projects</h2>
           <div @mouseleave="hideFilter">
@@ -24,6 +28,7 @@
             </ul>
           </div>
         </div>
+
         <CardsProject
           v-for="(project, index) in leftProjects"
           :key="index"
@@ -131,6 +136,12 @@ export default {
   mounted() {
     this.numberForProjects = this.projects.length
   },
+  beforeMount() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
 
   methods: {
     showFilter() {
@@ -152,6 +163,13 @@ export default {
     },
     loadmore() {
       this.numberToShow += 5
+    },
+    handleScroll() {
+      if (window.scrollY > 400) {
+        this.$refs.title.classList.add('project-title-fixed')
+      } else {
+        this.$refs.title.classList.remove('project-title-fixed')
+      }
     },
   },
 }
@@ -256,6 +274,10 @@ export default {
     }
   }
 }
+.project-title-fixed {
+  opacity: 0 !important;
+}
+
 .no-projects-found {
   h2 {
     @include h2;
