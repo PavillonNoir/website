@@ -212,7 +212,17 @@ header {
     background-color: rgba(112, 112, 112, 0.5);
   }
   &-menu {
-    margin-top: 100px;
+    margin-top: 6.25rem;
+    @include responsive('widescreen') {
+      margin-top: calc(6.25rem * 0.75);
+    }
+    @include responsive('desktop') {
+      margin-top: calc(6.25rem * 0.64);
+    }
+    @include responsive('tablet') {
+      margin-top: calc(6.25rem * 0.51);
+    }
+
     color: $white;
     ul {
       padding: 0;
