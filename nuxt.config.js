@@ -15,7 +15,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~assets/css/main.css'],
+  css: ['~assets/scss/main.scss'],
 
   styleResources: {
     scss: ['~assets/scss/main.scss'],
@@ -33,7 +33,10 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/vue-carousel', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vue-carousel', ssr: false },
+    { src: '~~/node_modules/vue-rellax/lib/nuxt-plugin', ssr: false },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [

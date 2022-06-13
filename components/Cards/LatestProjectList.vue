@@ -1,12 +1,13 @@
 <template>
   <div class="cardlist">
     <div class="left-side">
-      <div class="project-title">
+      <div ref="title" class="project-title">
         <h2 class="title">{{ title }}</h2>
         <div>
           <nuxtLink to="/projects" class="link">Featured projects</nuxtLink>
         </div>
       </div>
+
       <CardsProject
         v-for="(project, index) in leftProjects"
         :key="index"
@@ -63,6 +64,12 @@ export default {
       )
     },
   },
+  beforeMount() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
   methods: {
     showFilter() {
       this.showfilter = true
@@ -80,6 +87,14 @@ export default {
       this.projectRightSide = this.projectRightSide.filter(
         (item) => item.category === event.target.innerText
       )
+    },
+    handleScroll() {
+      console.log(this.$refs.title.offsetTop)
+      if (window.scrollY > 2880) {
+        this.$refs.title.classList.add('project-title-fixed')
+      } else {
+        this.$refs.title.classList.remove('project-title-fixed')
+      }
     },
   },
 }
@@ -166,6 +181,9 @@ export default {
     .right-side {
       grid-gap: 40px;
     }
+  }
+  .project-title-fixed {
+    opacity: 1 !important;
   }
 }
 </style>

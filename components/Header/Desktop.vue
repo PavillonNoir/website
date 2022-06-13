@@ -201,8 +201,9 @@ header {
       width: calc(501px * 0.51);
     }
     padding: 30px 90px 90px;
-    @media (max-width: 768px) {
+    @include responsive('phone') {
       padding: 30px 30px 30px;
+      width: 100%;
     }
   }
   .grey-container {
