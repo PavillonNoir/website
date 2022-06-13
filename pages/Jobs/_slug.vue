@@ -2,7 +2,7 @@
 <template>
   <div class="job">
     <main class="single-job d-flex flex-wrap justify-content-between">
-      <div  class="col-md-12 col-lg-6 job-infos sticky">
+      <div class="col-md-12 col-lg-6 job-infos sticky">
         <p class="sub-title">Jobs</p>
         <h2 class="single-job__title" v-html="job[0].title.rendered"></h2>
         <div
@@ -110,6 +110,5 @@ export default {
     @include body;
     margin-bottom: 30px !important;
   }
-  
 }
 </style>

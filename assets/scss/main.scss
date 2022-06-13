@@ -73,7 +73,7 @@ h6 {
 .fullwidth-small-small {
   @include marge('fullwidth', 'small', 'small');
 }
-.sticky{
+.sticky {
   position: sticky;
   position: -webkit-sticky;
   top: 0;
