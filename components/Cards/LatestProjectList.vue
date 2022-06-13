@@ -16,7 +16,7 @@
         direction="right"
       />
     </div>
-    <div v-rellax="{ speed: 1 }" class="right-side">
+    <div class="right-side">
       <CardsProject
         v-for="(project, index) in rightProjects"
         :key="index"

@@ -1,12 +1,10 @@
 <template>
   <div class="the-agency">
-    
-      <TheAgencyHero :catchphrase="catchPhrase" />
-      <TheAgencySkillsAnd360 :block360="block360" :skills="skills" />
-      <TheAgencyTeam :file="teamPhoto" />
-      <TheAgencyMembers :teams="teams" />
-      <FooterJobCrew :jobs="jobs" />
-   
+    <TheAgencyHero :catchphrase="catchPhrase" />
+    <TheAgencySkillsAnd360 :block360="block360" :skills="skills" />
+    <TheAgencyTeam :file="teamPhoto" />
+    <TheAgencyMembers :teams="teams" />
+    <FooterJobCrew :jobs="jobs" />
   </div>
 </template>
 <script>

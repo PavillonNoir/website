@@ -203,7 +203,7 @@ header {
     padding: 30px 90px 90px;
     @include responsive('phone') {
       padding: 30px 30px 30px;
-      width:100%
+      width: 100%;
     }
   }
   .grey-container {

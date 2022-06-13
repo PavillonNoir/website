@@ -1,8 +1,8 @@
 /* eslint-disable vue/no-v-html */
 <template>
   <div class="job">
-    <main class="single-job d-flex justify-content-between">
-      <div v-rellax="{ speed: -15 }" class="col-md-12 col-lg-6 job-infos">
+    <main class="single-job d-flex flex-wrap justify-content-between">
+      <div  class="col-md-12 col-lg-6 job-infos sticky">
         <p class="sub-title">Jobs</p>
         <h2 class="single-job__title" v-html="job[0].title.rendered"></h2>
         <div
@@ -10,7 +10,7 @@
           v-html="jobAcf.description"
         ></div>
       </div>
-      <div  class="col-md-12 col-lg-6">
+      <div class="col-md-12 col-lg-6">
         <h2
           class="single-job__title transparent"
           v-html="job[0].title.rendered"
@@ -58,6 +58,9 @@ export default {
       color: $primary;
       text-transform: uppercase;
       letter-spacing: 1px;
+      @include responsive('phone') {
+        margin-bottom: 2.5rem;
+      }
     }
     &-details {
       @include body;
@@ -99,10 +102,14 @@ export default {
   .transparent {
     opacity: 0;
     margin-top: 30px;
+    @include responsive('phone') {
+      display: none;
+    }
   }
   .sub-title {
     @include body;
     margin-bottom: 30px !important;
   }
+  
 }
 </style>
