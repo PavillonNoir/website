@@ -310,16 +310,19 @@ export default {
     flex-wrap: wrap;
     row-gap: 1.875rem;
     @include responsive('widescreen') {
+      max-height: calc(300px * 0.75);
       padding: calc(5.125rem * 0.75) calc(5.625rem * 0.75)
         calc(5.4375rem * 0.75);
       row-gap: calc(1.875rem * 0.75);
     }
     @include responsive('desktop') {
+      max-height: calc(300px * 0.64);
       padding: calc(5.125rem * 0.64) calc(5.625rem * 0.64)
         calc(5.4375rem * 0.64);
       row-gap: calc(1.875rem * 0.64);
     }
     @include responsive('tablet') {
+      max-height: 100%;
       padding: calc(5.125rem * 0.51) calc(5.625rem * 0.51)
         calc(5.4375rem * 0.51);
       row-gap: calc(1.875rem * 0.51);

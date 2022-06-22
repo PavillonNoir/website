@@ -10,14 +10,11 @@
           <h2 class="title desktop">Featured Projects</h2>
           <h2 class="title mobile">Featured <br />Projects</h2>
           <div @mouseleave="hideFilter">
-            <nuxtLink v-b-hover="showFilter" :to="description.link" class="link"
-              >{{ description.title }}
-              {{ description.filter ? `- ${categoryFiltered}` : '' }}</nuxtLink
-            >
-            <ul
-              v-show="description.filter"
-              :class="showfilter ? 'project-filter show' : 'project-filter'"
-            >
+            <div v-b-hover="showFilter" class="link">
+              {{ description.title }}
+              {{ description.filter ? `- ${categoryFiltered}` : '' }}
+            </div>
+            <ul :class="showfilter ? 'project-filter show' : 'project-filter'">
               <li
                 v-for="(category, index) in categories"
                 :key="index"
@@ -46,17 +43,6 @@
         />
       </div>
     </div>
-    <div v-show="filterProjects.length === 0" class="no-projects-found">
-      <h2 class="text-center">No projects found</h2>
-    </div>
-    <div
-      v-if="filterProjects.length <= numberForProjects"
-      class="load-more d-flex justify-content-center"
-    >
-      <a @click="loadmore">
-        <span class="text">Load more</span>
-      </a>
-    </div>
   </div>
 </template>
 <script>
@@ -72,12 +58,13 @@ export default {
       type: Array,
       required: true,
     },
-    title: {
-      type: String,
-      required: true,
-    },
+
     description: {
       type: Object,
+      required: true,
+    },
+    categories: {
+      type: Array,
       required: true,
     },
   },
@@ -88,54 +75,25 @@ export default {
       InitialProjects: [...this.projects],
       showfilter: false,
       categoryFiltered: 'All',
-      categories: [
-        'All',
-        '360°',
-        'Events & XP',
-        'Image & Branding',
-        'Film & Content',
-        'Creative Technology',
-        'Social & Influence',
-      ],
-      numberToShow: 5,
-      numberForProjects: 0,
+      
     }
   },
 
   computed: {
     sizeofArray() {
-      return this.filterProjects.length
+      return this.projects.length
     },
     leftProjects() {
-      return this.filterProjects.slice(0, Math.floor(this.sizeofArray / 2))
+      return this.projects.slice(0, Math.floor(this.sizeofArray / 2))
     },
     rightProjects() {
-      return this.filterProjects.slice(
+      return this.projects.slice(
         Math.floor(this.sizeofArray / 2),
         this.projects.length
       )
     },
-    filterProjects() {
-      return this.projectToload.filter((project) => {
-        if (this.categoryFiltered === 'All') {
-          return project
-        } else {
-          return (
-            project.pure_taxonomies.skill &&
-            project.pure_taxonomies.skill.find(
-              (el) => el.name === this.categoryFiltered
-            )
-          )
-        }
-      })
-    },
-    projectToload() {
-      return this.InitialProjects.slice(0, this.numberToShow)
-    },
   },
-  mounted() {
-    this.numberForProjects = this.projects.length
-  },
+   
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll)
   },
@@ -161,9 +119,7 @@ export default {
         (item) => item.category === event.target.innerText
       )
     },
-    loadmore() {
-      this.numberToShow += 5
-    },
+    
     handleScroll() {
       if (window.scrollY > 400) {
         this.$refs.title.classList.add('project-title-fixed')

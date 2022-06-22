@@ -1,7 +1,7 @@
 <template>
   <div class="cardlist">
     <div class="left-side">
-      <div ref="title" class="project-title">
+      <div ref="title" class="sticky project-title ">
         <h2 class="title">{{ title }}</h2>
         <div>
           <nuxtLink to="/projects" class="link">Featured projects</nuxtLink>

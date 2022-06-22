@@ -1,45 +1,65 @@
 <template>
   <div v-show="projectDetail" class="single-project">
-    <LazyHydrate when-idle>
-      <div
-        class="single-project__cover"
-        :style="`background-image: url(${
-          projectDetail.acf.cover &&
-          projectDetail.acf.cover.image.paysage.sizes.large
-        });`"
-      >
-        <video
-          v-show="projectDetail.acf.cover.type === 'video'"
-          ref="showreelvideo"
-          :poster="projectDetail.acf.cover.image.paysage.url"
-          preload="true"
-          autoplay
-          loop
-          playsinline
-          muted
-          class="cover-video"
+    <div v-show="projectDetail.acf.cover.type === 'image'" class="cover-image">
+      <LazyHydrate when-idle>
+        <div
+          class="single-project__cover desktop"
+          :style="`background-image: url(${
+            projectDetail.acf.cover &&
+            projectDetail.acf.cover.image.paysage.sizes.large
+          });`"
         >
-          <source :src="projectDetail.acf.cover.video.url" type="video/mp4" />
-          <track kind="captions" label="English" default />
-        </video>
-        <h2 class="single-project__cover-title">
-          {{ projectDetail.title.rendered || 'Project title' }}
-        </h2>
-      </div>
-    </LazyHydrate>
-    <LazyHydrate when-visible>
-      <div
-        class="single-project__cover mobile"
-        :style="`background-image: url(${
-          projectDetail.acf.cover &&
-          projectDetail.acf.cover.image.portrait.sizes.large
-        });`"
-      >
-        <h2 class="single-project__cover-title">
-          {{ projectDetail.title.rendered }}
-        </h2>
-      </div>
-    </LazyHydrate>
+          <h2 class="single-project__cover-title">
+            {{ projectDetail.title.rendered || 'Project title' }}
+          </h2>
+        </div>
+      </LazyHydrate>
+      <LazyHydrate when-visible>
+        <div
+          class="single-project__cover mobile"
+          :style="`'background-image': url(${
+            projectDetail.acf.cover &&
+            projectDetail.acf.cover.image.portrait.sizes.large
+          });`"
+        >
+          <h2 class="single-project__cover-title">
+            {{ projectDetail.title.rendered }}
+          </h2>
+        </div>
+      </LazyHydrate>
+    </div>
+    <div v-show="projectDetail.acf.cover.type === 'video'" class="cover-video">
+      <LazyHydrate when-idle>
+        <div class="single-project__cover-video desktop">
+          <video preload="true" playsinline autoplay muted loop>
+            <source
+              :src="projectDetail.acf.cover.video.paysage.url"
+              type="video/mp4"
+            />
+            <track kind="captions" label="English" default />
+          </video>
+          <h2 class="single-project__cover-video-title">
+            {{ projectDetail.title.rendered || 'Project title' }}
+          </h2>
+        </div>
+      </LazyHydrate>
+      <LazyHydrate when-visible>
+        <div class="single-project__cover-video mobile">
+          <video preload="true" playsinline autoplay muted loop>
+            <source
+              :src="projectDetail.acf.cover.video.portrait.url"
+              type="video/mp4"
+            />
+            <track kind="captions" label="English" default />
+          </video>
+
+          <h2 class="single-project__cover-video-title">
+            {{ projectDetail.title.rendered }}
+          </h2>
+        </div>
+      </LazyHydrate>
+    </div>
+
     <LazyHydrate when-visible>
       <b-row class="single-project-content justify-content-between">
         <b-col
@@ -126,11 +146,17 @@ export default {
     BlocksContent: () => import('@/components/Blocks/Content'),
     BlocksTwoContent: () => import('@/components/Blocks/TwoContent'),
     BlocksThreeContent: () => import('@/components/Blocks/ThreeContent'),
+    BlocksSliderImage: () => import('@/components/Blocks/SliderImage'),
   },
   async asyncData({ app, params }) {
     const project = await app.$wp.cpt('project').slug(params.slug).embed()
     const projectDetail = project[0]
     return { projectDetail }
+  },
+  data() {
+    return {
+      projectstyles: {},
+    }
   },
 
   methods: {
@@ -146,6 +172,9 @@ export default {
       }
       if (block === 'bloc_3_contenu') {
         return 'BlocksThreeContent'
+      }
+      if (block === 'bloc_slider') {
+        return 'BlocksSliderImage'
       }
     },
     htmlEncode(str) {
@@ -166,19 +195,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 1080px;
-    @include responsive('desktop') {
-      height: calc(1080px * 0.75);
-    }
-    @include responsive('widescreen') {
-      height: calc(1080px * 0.64);
-    }
-    @include responsive('tablet') {
-      height: calc(1080px * 0.51);
-    }
-    @include responsive('phone') {
-      height: calc(1080px * 0.35);
-    }
+    height: 100vh;
+
     &::after {
       content: '';
       position: absolute;
@@ -207,6 +225,51 @@ export default {
       color: $white;
       text-align: center;
       z-index: 999;
+    }
+  }
+  &__cover-video {
+    position: relative;
+    background-color: $primary;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    video{
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.25);
+    }
+    &-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      @include h2;
+      color: $white;
+      text-align: center;
+      z-index: 999;
+    }
+    @include responsive('phone') {
+      height: 667px;
+      display: none;
+    }
+    &.mobile {
+      @media (min-width: 768px) {
+        display: none;
+      }
+      @include responsive('phone') {
+        display: flex;
+        align-items: center;
+      }
     }
   }
   &-content {

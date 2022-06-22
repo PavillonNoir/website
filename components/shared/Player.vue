@@ -2,7 +2,7 @@
   <div class="showreel">
     <video
       ref="showreelvideo"
-      poster="https://preprod.pavillonnoir.com/wp-content/uploads/2022/04/showreel-1024x579.webp"
+      :poster="source.video.poster.url"
       preload="true"
       playsinline
       muted
@@ -11,7 +11,7 @@
       @timeupdate="progressbar"
     >
       <source
-        src="https://preprod.pavillonnoir.com/wp-content/uploads/2022/04/GoNoticed-I-Streetwear-2022-I-Zalando.mp4"
+        src="source.video.source.url"
         type="video/mp4"
       />
       <track kind="captions" label="English" default />
@@ -141,11 +141,18 @@
         fill="#fff"
       />
     </svg>
+    
   </div>
 </template>
 <script>
 export default {
   name: 'SharedPlayer',
+  props: {
+    source: {
+      type: Array,
+      required: true,
+    },
+  },
 
   data() {
     return {
@@ -222,6 +229,7 @@ export default {
 <style lang="scss" scoped>
 .showreel {
   position: relative;
+  
   .btn-play {
     position: absolute;
     inset: 0;
@@ -245,15 +253,19 @@ export default {
     }
   }
   .video-player {
-    height: 67.875rem;
+    height: 46.333125rem;
+    width: 26.0625rem;
     @include responsive('widescreen') {
-      height: calc(67.875rem * 0.75);
+      height: calc(46.333125rem * 0.75);
+      width: calc(26.0625rem * 0.75) !important;
     }
     @include responsive('desktop') {
-      height: calc(67.875rem * 0.64);
+      height: calc(46.333125rem * 0.64);
+      width: calc(26.0625rem * 0.64);
     }
     @include responsive('tablet') {
-      height: calc(67.875rem * 0.51);
+      height: calc(46.333125rem * 0.51);
+      width: calc(26.0625rem * 0.51);
     }
     @include responsive('phone') {
       height: 41.6875rem;
