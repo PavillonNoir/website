@@ -89,7 +89,6 @@ export default {
       )
     },
     handleScroll() {
-      console.log(this.$refs.title.offsetTop)
       if (window.scrollY > 2880) {
         this.$refs.title.classList.add('project-title-fixed')
       } else {
