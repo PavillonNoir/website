@@ -10,10 +10,7 @@
       step="0.1"
       @timeupdate="progressbar"
     >
-      <source
-        src="source.video.source.url"
-        type="video/mp4"
-      />
+      <source :src="source.video.source.url" type="video/mp4" />
       <track kind="captions" label="English" default />
     </video>
     <div :class="showIcon ? 'd-none' : 'controls d-flex align-items-end'">
@@ -141,7 +138,6 @@
         fill="#fff"
       />
     </svg>
-    
   </div>
 </template>
 <script>
@@ -149,7 +145,7 @@ export default {
   name: 'SharedPlayer',
   props: {
     source: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
@@ -229,7 +225,7 @@ export default {
 <style lang="scss" scoped>
 .showreel {
   position: relative;
-  
+
   .btn-play {
     position: absolute;
     inset: 0;
@@ -269,6 +265,7 @@ export default {
     }
     @include responsive('phone') {
       height: 41.6875rem;
+      width: 100% !important;
     }
   }
   .controls {

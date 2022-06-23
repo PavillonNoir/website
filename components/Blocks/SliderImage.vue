@@ -90,15 +90,13 @@
       class="block-slider__video"
     >
       <div class="block-slider__video-container">
-        <VueSlickCarousel ref="videoCarousel" v-bind="settingsVideo">
+        <VueSlickCarousel ref="videoCarousel" v-bind="settings">
           <div
             v-for="(video, index) in block.videos"
             :key="index"
             class="video-slider"
           >
-            <div class="video-content">
-              <SharedPlayer :source="video" />
-            </div>
+            <SharedPlayer :source="video" />
           </div>
         </VueSlickCarousel>
       </div>
@@ -123,9 +121,8 @@ export default {
   data() {
     return {
       settings: {
-        arrows: true,
         infinite: true,
-        centerPadding: '20px',
+        arrows: false,
         slidesToShow: 1,
         slidesToScroll: 1,
         variableWidth: true,
@@ -135,9 +132,8 @@ export default {
           {
             breakpoint: 768,
             settings: {
-              arrows: true,
               centerMode: true,
-              centerPadding: '40px',
+              arrows: false,
               variableWidth: true,
               slidesToShow: 1,
               slidesToScroll: 1,
@@ -155,40 +151,7 @@ export default {
           },
         ],
       },
-      settingsVideo: {
-        arrows: true,
-        infinite: true,
-        centerPadding: '20px',
 
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        variableWidth: true,
-        draggable: true,
-
-        responsive: [
-          {
-            breakpoint: 768,
-            settings: {
-              arrows: true,
-              centerMode: true,
-              centerPadding: '40px',
-              variableWidth: true,
-              slidesToShow: 1,
-              slidesToScroll: 1,
-            },
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              arrows: false,
-              centerMode: true,
-              variableWidth: true,
-              slidesToShow: 1,
-              slidesToScroll: 1,
-            },
-          },
-        ],
-      },
       classStyle: {
         class: 'block-slider ',
       },
@@ -203,6 +166,12 @@ export default {
     },
     prev() {
       this.$refs.imageCarousel.prev()
+    },
+    nextVideo() {
+      this.$refs.videoCarousel.next()
+    },
+    prevVideo() {
+      this.$refs.videoCarousel.prev()
     },
     getMargeAndWidth(margeTop, margeBottom) {
       this.classStyle.class += `fullwidth-${margeTop}-${margeBottom}`
@@ -232,8 +201,11 @@ export default {
   &.fullwidth-small-small {
     @include marge('fullwidth', 'small', 'small');
   }
-  &__images{
-    width: 280px;
+  &__images {
+    @include responsive('phone') {
+      width: 100%;
+      height: 286px;
+    }
   }
   &__image {
     width: 1299px;
@@ -252,12 +224,8 @@ export default {
       height: calc(866px * 0.51);
     }
     @include responsive('phone') {
-      width: 376.91px;
+      width: 100%;
       height: 251.27px;
-      margin-right: 0.5125rem;
-    }
-    @media (max-width: 480px) {
-      width: 100vw;
       margin-right: 0;
     }
   }
@@ -287,6 +255,9 @@ export default {
           font-weight: 700;
         }
       }
+    }
+    &.arrows-video {
+      top: 99%;
     }
   }
   .video-slider {

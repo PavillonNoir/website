@@ -75,7 +75,6 @@ export default {
       InitialProjects: [...this.projects],
       showfilter: false,
       categoryFiltered: 'All',
-      
     }
   },
 
@@ -93,7 +92,7 @@ export default {
       )
     },
   },
-   
+
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll)
   },
@@ -119,7 +118,7 @@ export default {
         (item) => item.category === event.target.innerText
       )
     },
-    
+
     handleScroll() {
       if (window.scrollY > 400) {
         this.$refs.title.classList.add('project-title-fixed')

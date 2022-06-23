@@ -234,11 +234,10 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    video{
+    video {
       width: 100%;
       height: 100vh;
       object-fit: cover;
-      
     }
     &::after {
       content: '';

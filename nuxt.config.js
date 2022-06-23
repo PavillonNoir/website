@@ -98,7 +98,7 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.API_URL,
   },
-  
+
   cache: {
     // if you're serving multiple host names (with differing
     // results) from the same server, set this option to true.

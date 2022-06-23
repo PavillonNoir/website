@@ -84,7 +84,7 @@ export default {
     loadmore() {
       if (this.numberToShow < this.numberForProjects) {
         this.numberToShow += 5
-      } 
+      }
     },
   },
 }
@@ -110,7 +110,7 @@ export default {
     height: 7.5rem;
     border-right: 1px solid $grey;
   }
-  .blockcta-items__link{
+  .blockcta-items__link {
     background-color: transparent;
     border: none;
   }
