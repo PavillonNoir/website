@@ -185,6 +185,7 @@ export default {
 </script>
 <style lang="scss">
 .single-project {
+  overflow-x: hidden;
   &__cover {
     position: relative;
     background-size: cover;
